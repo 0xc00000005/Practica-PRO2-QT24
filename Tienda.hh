@@ -10,16 +10,13 @@ public:
     // Constructor
     Tienda();
 
-    // Destructor
-    ~Tienda();
-
     void leer_salas();
 
     void leer_cajas();
 
 private:
-    BinTree<Sala> bintree_salas;
-    BinTree<Sala> leer_cajas_private();
+    BinTree<string> bintree_salas;
+    BinTree<string> leer_salas_private();
     vector<Caja> Cajas;
 };
 

@@ -9,6 +9,7 @@ using namespace std;
 int main() {
     Tienda megathlon = Tienda();
     megathlon.leer_salas();
+    megathlon.leer_cajas();
     string instruccion;
     while (instruccion != "fin") {
         if (instruccion == "nuevo_cliente") {

@@ -54,7 +54,7 @@ void Tienda::nuevo_cliente() {
         BinTree<std::string> subarbol = encontrar_subarbol(bintree_salas, item, camino);
 
         // Mostrar el subárbol
-        std::cout << "Subarbol de la tienda para el cliente " << id << ":\n";
+        std::cout << "Subarbol del cliente " << id << ":\n";
         subarbol.setOutputFormat(BinTree<std::string>::VISUALFORMAT);
         std::cout << subarbol << std::endl;
 
@@ -75,7 +75,10 @@ void Tienda::leer_salas() {
 }
 
 void Tienda::leer_cajas() {
-    
+    int num;
+    cin >> num;
+    cajas.resize(num);
+    cout << "Hay " << num << " cajas\n";
 }
 
 BinTree<std::string> Tienda::leer_salas_private() {

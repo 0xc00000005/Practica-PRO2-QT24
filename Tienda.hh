@@ -18,7 +18,7 @@ public:
     void leer_salas();
 
     // Leer las cajas disponibles
-    void leer_cajas();
+    //void leer_cajas();
 
     // Añadir un nuevo cliente y mostrar el subárbol e instrucciones
     void nuevo_cliente();
@@ -37,7 +37,7 @@ private:
     BinTree<std::string> leer_salas_private();
 
     // Lista de cajas disponibles
-    std::vector<Caja> cajas;
+    //std::vector<Caja> cajas;
 
     // Mapa de clientes registrados en la tienda
     std::map<int, Cliente> clientes;

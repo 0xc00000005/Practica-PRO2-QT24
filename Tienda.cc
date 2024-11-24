@@ -2,37 +2,38 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+using namespace std;
+typedef BinTree<string> BT;
 // Constructor
 Tienda::Tienda() {
-    bintree_salas = BinTree<std::string>();
+    bintree_salas = BT();
 }
 
 // Función auxiliar para encontrar el subárbol que contiene el item y registrar el camino
-BinTree<std::string> Tienda::encontrar_subarbol(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino) {
-    if (arbol.empty()) return BinTree<std::string>();
+BT Tienda::encontrar_subarbol(const BT& arbol, const std::string& item, std::vector<std::string>& camino) {
+    if (arbol.empty()) return BT();
 
     if (arbol.value() == item) {
-        return BinTree<std::string>(arbol.value());
+        return BT(arbol.value());
     }
 
     // Buscar en el subárbol izquierdo
     camino.push_back("left");
-    BinTree<std::string> subarbol_izq = encontrar_subarbol(arbol.left(), item, camino);
+    BT subarbol_izq = encontrar_subarbol(arbol.left(), item, camino);
     if (!subarbol_izq.empty()) {
-        return BinTree<std::string>(arbol.value(), subarbol_izq, BinTree<std::string>());
+        return BT(arbol.value(), subarbol_izq, BT());
     }
     camino.pop_back();
 
     // Buscar en el subárbol derecho
     camino.push_back("right");
-    BinTree<std::string> subarbol_der = encontrar_subarbol(arbol.right(), item, camino);
+    BT subarbol_der = encontrar_subarbol(arbol.right(), item, camino);
     if (!subarbol_der.empty()) {
-        return BinTree<std::string>(arbol.value(), BinTree<std::string>(), subarbol_der);
+        return BT(arbol.value(), BT(), subarbol_der);
     }
     camino.pop_back();
 
-    return BinTree<std::string>();
+    return BT();
 }
 
 void Tienda::nuevo_cliente() {
@@ -51,11 +52,11 @@ void Tienda::nuevo_cliente() {
     if (num_items > 0) {
         std::string item = items[0];
         std::vector<std::string> camino;
-        BinTree<std::string> subarbol = encontrar_subarbol(bintree_salas, item, camino);
+        BT subarbol = encontrar_subarbol(bintree_salas, item, camino);
 
         // Mostrar el subárbol
         std::cout << "Subarbol del cliente " << id << ":\n";
-        subarbol.setOutputFormat(BinTree<std::string>::VISUALFORMAT);
+        subarbol.setOutputFormat(BT::VISUALFORMAT);
         std::cout << subarbol << std::endl;
 
         // Mostrar el recorrido
@@ -74,14 +75,14 @@ void Tienda::leer_salas() {
     bintree_salas = leer_salas_private();
 }
 
-void Tienda::leer_cajas() {
+/*void Tienda::leer_cajas() {
     int num;
     cin >> num;
     cajas.resize(num);
     cout << "Hay " << num << " cajas\n";
-}
+}*/
 
-BinTree<std::string> Tienda::leer_salas_private() {
+BT Tienda::leer_salas_private() {
     BinTree<string> t;
     t.setInputOutputFormat(BT::VISUALFORMAT);
     cin >> t;

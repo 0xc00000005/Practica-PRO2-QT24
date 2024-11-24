@@ -1,0 +1,127 @@
+                       zapatos
+                          |
+               ----------- -----------
+              |                       |
+           piscina                  hipica
+              |                       |
+        ------ ------             ---- ----
+       |             |           |         |
+     futbol     alimentacion    golf     fitnes
+       |
+   ---- ----
+  |         |
+tenis    basquet
+
+3
+
+nuevo_cliente
+zapatos #
+
+quiere_comprar 1
+
+salas_a_visitar 1
+
+nuevo_cliente
+piscina #
+
+quiere_comprar 2
+
+salas_a_visitar 2
+
+nuevo_cliente
+basquet #
+
+quiere_comprar 3
+
+salas_a_visitar 3
+
+nuevo_cliente
+fitnes #
+
+quiere_comprar 4
+
+salas_a_visitar 4
+
+nuevo_cliente 
+zapatos piscina tenis #
+
+quiere_comprar 5
+
+salas_a_visitar 5
+
+nuevo_cliente 
+futbol fitnes #
+
+quiere_comprar 6
+
+salas_a_visitar 6
+
+nuevo_cliente 
+basquet alimentacion golf #
+
+quiere_comprar 7
+
+salas_a_visitar 7
+
+pago_cliente
+1 11:05:05 alimentacion 5 zapatos 1 fitnes 2 #
+
+escribir_caja 1 11:05:06
+
+pago_cliente
+2 11:05:07 piscina 1 fitnes 3 futbol 1 #
+
+pago_cliente
+3 11:05:09 piscina 1 basquet 2 #
+
+escribir_cajas 11:05:10
+
+nuevo_cliente
+futbol fitnes #
+
+pago_cliente
+4 11:05:12 fitnes 3 zapatos 1 #
+
+escribir_cajas 11:05:13
+
+pago_cliente
+5 11:05:15 zapatos 2 piscina 1 #
+
+escribir_cajas 11:05:20
+
+pago_cliente
+8 11:05:22 futbol 1 fitnes 1 #
+
+escribir_cajas 11:05:24
+
+pago_cliente
+6 11:05:25 futbol 2 fitnes 1 piscina 1 #
+
+escribir_cajas 11:05:27
+
+escribir_cajas 11:05:46
+
+pago_cliente
+7 11:05:50 basquet 2 alimentacion 2 golf 1 #
+
+escribir_cajas 11:05:55
+
+compra_y_no_quiere 1
+
+compra_y_no_quiere 2
+
+compra_y_no_quiere 3
+
+compra_y_no_quiere 4
+
+compra_y_no_quiere 5
+
+compra_y_no_quiere 6
+
+compra_y_no_quiere 7
+
+compra_y_no_quiere 8
+
+compran_y_no_quieren
+
+fin

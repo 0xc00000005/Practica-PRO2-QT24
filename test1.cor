@@ -1,0 +1,346 @@
+Organizacion de las salas:
+                       zapatos
+                          |
+               ----------- -----------
+              |                       |
+           piscina                  hipica
+              |                       |
+        ------ ------             ---- ----
+       |             |           |         |
+     futbol     alimentacion    golf     fitnes
+       |
+   ---- ----
+  |         |
+tenis    basquet
+
+Hay 3 cajas
+
+#nuevo_cliente
+Subarbol del cliente 1:
+zapatos
+
+Recorrido por la tienda del cliente 1:
+zapatos
+
+#quiere_comprar 1
+zapatos
+
+#salas_a_visitar 1
+zapatos
+
+#nuevo_cliente
+Subarbol del cliente 2:
+     zapatos
+        |
+    ----
+   |
+piscina
+
+Recorrido por la tienda del cliente 2:
+zapatos
+left
+piscina
+back
+
+#quiere_comprar 2
+piscina
+
+#salas_a_visitar 2
+piscina zapatos
+
+#nuevo_cliente
+Subarbol del cliente 3:
+         zapatos
+            |
+        ----
+       |
+    piscina
+       |
+   ----
+  |
+futbol
+  |
+   ----
+       |
+    basquet
+
+Recorrido por la tienda del cliente 3:
+zapatos
+left
+piscina
+left
+futbol
+right
+basquet
+back
+back
+back
+
+#quiere_comprar 3
+basquet
+
+#salas_a_visitar 3
+basquet futbol piscina zapatos
+
+#nuevo_cliente
+Subarbol del cliente 4:
+zapatos
+   |
+    ----
+        |
+      hipica
+        |
+         ----
+             |
+           fitnes
+
+Recorrido por la tienda del cliente 4:
+zapatos
+right
+hipica
+right
+fitnes
+back
+back
+
+#quiere_comprar 4
+fitnes
+
+#salas_a_visitar 4
+fitnes hipica zapatos
+
+#nuevo_cliente
+Subarbol del cliente 5:
+              zapatos
+                 |
+             ----
+            |
+         piscina
+            |
+        ----
+       |
+     futbol
+       |
+   ----
+  |
+tenis
+
+Recorrido por la tienda del cliente 5:
+zapatos
+left
+piscina
+left
+futbol
+left
+tenis
+back
+back
+back
+
+#quiere_comprar 5
+piscina tenis zapatos
+
+#salas_a_visitar 5
+futbol piscina tenis zapatos
+
+#nuevo_cliente
+Subarbol del cliente 6:
+         zapatos
+            |
+        ---- ----
+       |         |
+    piscina    hipica
+       |         |
+   ----           ----
+  |                   |
+futbol              fitnes
+
+Recorrido por la tienda del cliente 6:
+zapatos
+left
+piscina
+left
+futbol
+back
+back
+right
+hipica
+right
+fitnes
+back
+back
+
+#quiere_comprar 6
+fitnes futbol
+
+#salas_a_visitar 6
+fitnes futbol hipica piscina zapatos
+
+#nuevo_cliente
+Subarbol del cliente 7:
+                  zapatos
+                     |
+          ----------- -----------
+         |                       |
+      piscina                  hipica
+         |                       |
+   ------ ------             ----
+  |             |           |
+futbol     alimentacion    golf
+  |
+   ----
+       |
+    basquet
+
+Recorrido por la tienda del cliente 7:
+zapatos
+left
+piscina
+left
+futbol
+right
+basquet
+back
+back
+right
+alimentacion
+back
+back
+right
+hipica
+left
+golf
+back
+back
+
+#quiere_comprar 7
+alimentacion basquet golf
+
+#salas_a_visitar 7
+alimentacion basquet futbol golf hipica piscina zapatos
+
+#pago_cliente 1 11:05:05
+Cliente 1 compra 8 items
+Cliente 1 va a caja 1 y saldrá a las 11:05:27
+
+#escribir_caja 1 11:05:06
+1 11:05:27 
+
+#pago_cliente 2 11:05:07
+Cliente 2 compra 5 items
+Cliente 2 va a caja 2 y saldrá a las 11:05:26
+
+#pago_cliente 3 11:05:09
+Cliente 3 compra 3 items
+Cliente 3 va a caja 3 y saldrá a las 11:05:26
+
+#escribir_cajas 11:05:10
+Caja 1: 1 11:05:27 
+Caja 2: 2 11:05:26 
+Caja 3: 3 11:05:26 
+
+#nuevo_cliente
+Subarbol del cliente 8:
+         zapatos
+            |
+        ---- ----
+       |         |
+    piscina    hipica
+       |         |
+   ----           ----
+  |                   |
+futbol              fitnes
+
+Recorrido por la tienda del cliente 8:
+zapatos
+left
+piscina
+left
+futbol
+back
+back
+right
+hipica
+right
+fitnes
+back
+back
+
+#pago_cliente 4 11:05:12
+Cliente 4 compra 4 items
+Cliente 4 va a caja 2 y saldrá a las 11:05:44
+
+#escribir_cajas 11:05:13
+Caja 1: 1 11:05:27 
+Caja 2: 2 11:05:26 4 11:05:44 
+Caja 3: 3 11:05:26 
+
+#pago_cliente 5 11:05:15
+Cliente 5 compra 3 items
+Cliente 5 va a caja 3 y saldrá a las 11:05:43
+
+#escribir_cajas 11:05:20
+Caja 1: 1 11:05:27 
+Caja 2: 2 11:05:26 4 11:05:44 
+Caja 3: 3 11:05:26 5 11:05:43 
+
+#pago_cliente 8 11:05:22
+Cliente 8 compra 2 items
+Cliente 8 va a caja 1 y saldrá a las 11:05:43
+
+#escribir_cajas 11:05:24
+Caja 1: 1 11:05:27 8 11:05:43 
+Caja 2: 2 11:05:26 4 11:05:44 
+Caja 3: 3 11:05:26 5 11:05:43 
+
+#pago_cliente 6 11:05:25
+Cliente 6 compra 4 items
+Cliente 6 va a caja 1 y saldrá a las 11:06:01
+
+#escribir_cajas 11:05:27
+Caja 1: 1 11:05:27 8 11:05:43 6 11:06:01 
+Caja 2: 4 11:05:44 
+Caja 3: 5 11:05:43 
+
+#escribir_cajas 11:05:46
+Caja 1: 6 11:06:01 
+Caja 2: 
+Caja 3: 
+
+#pago_cliente 7 11:05:50
+Cliente 7 compra 5 items
+Cliente 7 va a caja 2 y saldrá a las 11:06:09
+
+#escribir_cajas 11:05:55
+Caja 1: 6 11:06:01 
+Caja 2: 7 11:06:09 
+Caja 3: 
+
+#compra_y_no_quiere 1
+7
+
+#compra_y_no_quiere 2
+4
+
+#compra_y_no_quiere 3
+1
+
+#compra_y_no_quiere 4
+1
+
+#compra_y_no_quiere 5
+0
+
+#compra_y_no_quiere 6
+1
+
+#compra_y_no_quiere 7
+0
+
+#compra_y_no_quiere 8
+0
+
+#compran_y_no_quieren
+1 2 3 4 6
+
+#fin

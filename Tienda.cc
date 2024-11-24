@@ -1,7 +1,15 @@
 #include "Tienda.hh"
+#include <iostream>
 
+// Constructor
 Tienda::Tienda() {
     bintree_salas = BinTree<string>();
+}
+
+void Tienda::nuevo_cliente() {
+    Cliente nuevoCliente;
+    int id = nuevoCliente.obtenerId();
+    clientes[id] = nuevoCliente;
 }
 
 void Tienda::leer_salas() {
@@ -9,10 +17,6 @@ void Tienda::leer_salas() {
 }
 
 void Tienda::leer_cajas() {
-    
-}
-
-void Tienda::nuevo_cliente(){
     
 }
 

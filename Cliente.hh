@@ -11,11 +11,11 @@ public:
     // Constructor con parámetros
     Cliente(const int id);
 
-    // Obtener el nombre del cliente
+    // Obtener el ID del cliente
     int obtenerId() const;
 
+    // Obtener el contador actual
     static int getContador();
-
 
 private:
     int id;

@@ -5,6 +5,7 @@
 #include "Sala.hh"
 #include "Cliente.hh"
 #include <vector>
+#include <map>
 
 class Tienda {
 public:
@@ -23,7 +24,7 @@ private:
     BinTree<string> bintree_salas;
     BinTree<string> leer_salas_private();
     vector<Caja> Cajas;
-    vector<Cliente> clientes;
+    map<int, Cliente> clientes;
 };
 
 #endif // TIENDA_HH

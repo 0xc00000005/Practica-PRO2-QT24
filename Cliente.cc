@@ -1,26 +1,22 @@
 #include "Cliente.hh"
 
 // Constructor por defecto
-Cliente::Cliente() {
-    nombre = "";
-    tiempoServicio = 0;
-}
+Cliente::Cliente() 
+    : id(++contador) {}
 
 // Constructor con parámetros
-Cliente::Cliente(const std::string& nombre, int tiempoServicio) {
+Cliente::Cliente(const int id) {
     // Aquí se usa this porque los nombres de los parámetros (nombre) son idénticos 
     // a los nombres de los atributos de la clase. Sin this, el compilador asumiría que 
     // nombre se refieren a los parámetros, no a los atributos.
-    this->nombre = nombre;
-    this->tiempoServicio = tiempoServicio;
+    this->id = id;
 }
 
 // Obtener el nombre del cliente
-std::string Cliente::obtenerNombre() const {
-    return nombre;
+int Cliente::obtenerId() const {
+    return id;
 }
 
-// Obtener el tiempo de servicio requerido
-int Cliente::obtenerTiempoServicio() const {
-    return tiempoServicio;
+int Cliente::getContador() const {
+    return contador;
 }

@@ -9,17 +9,17 @@ public:
     Cliente();
 
     // Constructor con parámetros
-    Cliente(const std::string& nombre, int tiempoServicio);
+    Cliente(const int id);
 
     // Obtener el nombre del cliente
-    std::string obtenerNombre() const;
+    int obtenerId() const;
 
-    // Obtener el tiempo de servicio requerido
-    int obtenerTiempoServicio() const;
+    static int getContador();
+
 
 private:
-    std::string nombre;
-    int tiempoServicio;
+    int id;
+    static int contador;
 };
 
 #endif // CLIENTE_HH

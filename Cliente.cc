@@ -21,9 +21,9 @@ int Cliente::getContador() {
     return contador;
 }
 
-void Cliente::desea(){
-    for(std::string nombre : items){
-        cout << nombre << endl;
+void Cliente::desea() const {
+    for(const auto& nombre : items){
+        std::cout << nombre << std::endl;
     }
 }
 

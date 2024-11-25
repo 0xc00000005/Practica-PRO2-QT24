@@ -18,7 +18,7 @@ public:
     // Obtener el contador actual
     static int getContador();
 
-    void desea();
+    void desea() const;
 
     void guardar_items(const std::vector<std::string>& itemscin);
 

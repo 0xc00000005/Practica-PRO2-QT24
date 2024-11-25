@@ -23,6 +23,7 @@ int Cliente::getContador() {
 
 void Cliente::desea() const {
     for(const auto& nombre : items){
+        // Parece que el problema está en que no accede a nombre
         std::cout << nombre << std::endl;
     }
 }

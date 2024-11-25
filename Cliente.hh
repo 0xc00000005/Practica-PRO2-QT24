@@ -1,6 +1,7 @@
 #ifndef CLIENTE_HH
 #define CLIENTE_HH
 
+#include <iostream>
 #include <string>
 #include <vector>
 

@@ -72,8 +72,8 @@ void Tienda::nuevo_cliente() {
             std::cout << "Item " << item << " no encontrado en la tienda.\n";
         }
     }
-
-    clientes[id] = nuevoCliente;
+    
+    clientes.push_back(nuevoCliente);
 }
 
 // Función para construir el subarbol a partir del camino

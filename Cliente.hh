@@ -2,6 +2,7 @@
 #define CLIENTE_HH
 
 #include <string>
+#include <vector>
 
 class Cliente {
 public:
@@ -17,9 +18,14 @@ public:
     // Obtener el contador actual
     static int getContador();
 
+    void desea();
+
+    void guardar_items(const std::vector<std::string>& itemscin);
+
 private:
     int id;
     static int contador;
+    std::vector<std::string> items;
 };
 
 #endif // CLIENTE_HH

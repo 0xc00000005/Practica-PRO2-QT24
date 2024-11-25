@@ -20,3 +20,13 @@ int Cliente::obtenerId() const {
 int Cliente::getContador() {
     return contador;
 }
+
+void Cliente::desea(){
+    for(std::string nombre : items){
+        cout << nombre << endl;
+    }
+}
+
+void Cliente::guardar_items(const std::vector<std::string>& itemscin){
+    items=itemscin;
+}

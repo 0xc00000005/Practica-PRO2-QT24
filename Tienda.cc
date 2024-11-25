@@ -50,7 +50,7 @@ void Tienda::nuevo_cliente() {
     while (std::cin >> item && item != "#") {
         items.push_back(item);
     }
-
+    nuevoCliente.guardar_items(items);
     // Procesar cada item
     for (const std::string& item : items) {
         std::vector<std::string> camino;

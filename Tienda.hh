@@ -43,7 +43,8 @@ private:
     std::map<int, Cliente> clientes;
 
     // Función auxiliar para encontrar el subárbol y registrar el camino
-    BinTree<std::string> encontrar_subarbol(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino);
+    bool encontrar_subarbol(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino);
+    BinTree<std::string> construir_subarbol(const vector<std::string>& camino);
 };
 
 #endif // TIENDA_HH

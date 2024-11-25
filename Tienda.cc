@@ -4,36 +4,40 @@
 #include <algorithm>
 using namespace std;
 typedef BinTree<string> BT;
+
 // Constructor
 Tienda::Tienda() {
     bintree_salas = BT();
 }
 
-// Función auxiliar para encontrar el subárbol que contiene el item y registrar el camino
-BT Tienda::encontrar_subarbol(const BT& arbol, const std::string& item, std::vector<std::string>& camino) {
-    if (arbol.empty()) return BT();
+// Función auxiliar para encontrar el subarbol y registrar el camino con nombres y direcciones
+bool Tienda::encontrar_subarbol(const BT& arbol, const std::string& item, std::vector<std::string>& camino) {
+    if (arbol.empty()) return false;
+
+    // Añadir el nombre de la sala actual
+    camino.push_back(arbol.value());
 
     if (arbol.value() == item) {
-        return BT(arbol.value());
+        return true;
     }
 
-    // Buscar en el subárbol izquierdo
+    // Buscar en el subarbol izquierdo
     camino.push_back("left");
-    BT subarbol_izq = encontrar_subarbol(arbol.left(), item, camino);
-    if (!subarbol_izq.empty()) {
-        return BT(arbol.value(), subarbol_izq, BT());
+    if (encontrar_subarbol(arbol.left(), item, camino)) {
+        return true;
     }
-    camino.pop_back();
+    camino.pop_back(); // Quitar "left"
 
-    // Buscar en el subárbol derecho
+    // Buscar en el subarbol derecho
     camino.push_back("right");
-    BT subarbol_der = encontrar_subarbol(arbol.right(), item, camino);
-    if (!subarbol_der.empty()) {
-        return BT(arbol.value(), BT(), subarbol_der);
+    if (encontrar_subarbol(arbol.right(), item, camino)) {
+        return true;
     }
-    camino.pop_back();
+    camino.pop_back(); // Quitar "right"
 
-    return BT();
+    // Si no se encuentra, retroceder
+    camino.pop_back(); // Quitar el nombre de la sala actual
+    return false;
 }
 
 void Tienda::nuevo_cliente() {
@@ -46,29 +50,49 @@ void Tienda::nuevo_cliente() {
     while (std::cin >> item && item != "#") {
         items.push_back(item);
     }
-    int num_items = items.size();
 
-    // Por simplicidad, manejaremos solo el primer item
-    if (num_items > 0) {
-        std::string item = items[0];
+    // Procesar cada item
+    for (const std::string& item : items) {
         std::vector<std::string> camino;
-        BT subarbol = encontrar_subarbol(bintree_salas, item, camino);
+        if (encontrar_subarbol(bintree_salas, item, camino)) {
+            // Mostrar el subarbol
+            std::cout << "Subarbol del cliente " << id << ":\n";
+            BT subarbol = construir_subarbol(camino);
+            subarbol.setOutputFormat(BT::VISUALFORMAT);
+            std::cout << subarbol << std::endl;
 
-        // Mostrar el subárbol
-        std::cout << "Subarbol del cliente " << id << ":\n";
-        subarbol.setOutputFormat(BT::VISUALFORMAT);
-        std::cout << subarbol << std::endl;
-
-        // Mostrar el recorrido
-        std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
-        std::cout << bintree_salas.value() << std::endl;
-        for (const std::string& dir : camino) {
-            std::cout << dir << std::endl;
+            // Mostrar el recorrido
+            std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
+            for (const std::string& paso : camino) {
+                std::cout << paso << std::endl;
+            }
+            std::cout << "back" << std::endl;
+        } else {
+            std::cout << "Item " << item << " no encontrado en la tienda.\n";
         }
-        std::cout << "back" << std::endl;
     }
 
     clientes[id] = nuevoCliente;
+}
+
+// Función para construir el subarbol a partir del camino
+BinTree<string> Tienda::construir_subarbol(const vector<std::string>& camino) {
+    if (camino.empty()) return BT();
+
+    BinTree<string> arbol(camino.back());
+    for (int i = camino.size() - 2; i >= 0; --i) {
+        std::string dir = camino[i];
+        --i;
+        if (dir == "left") {
+            arbol = BinTree<string>(camino[i], arbol, BT());
+        } else if (dir == "right") {
+            arbol = BinTree<string>(camino[i], BT(), arbol);
+        } else {
+            // Caso no esperado
+            arbol = BinTree<string>(camino[i], arbol, BT());
+        }
+    }
+    return arbol;
 }
 
 void Tienda::leer_salas() {

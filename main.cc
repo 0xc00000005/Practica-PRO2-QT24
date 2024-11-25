@@ -15,7 +15,9 @@ int main() {
         if (instruccion == "nuevo_cliente") {
             megathlon.nuevo_cliente();
         } else if (instruccion == "quiere_comprar") {
-            // Function call for quiere_comprar
+            int id;
+            cin >> id;
+            megathlon.cliente_por_id(id).desea();
         } else if (instruccion == "salas_a_visitar") {
             // Function call for salas_a_visitar
         } else if (instruccion == "pago_cliente") {

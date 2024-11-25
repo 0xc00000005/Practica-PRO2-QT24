@@ -95,6 +95,10 @@ BinTree<string> Tienda::construir_subarbol(const vector<std::string>& camino) {
     return arbol;
 }
 
+Cliente Tienda::cliente_por_id(int id) const{
+    return clientes[id];
+}
+
 void Tienda::leer_salas() {
     bintree_salas = leer_salas_private();
 }

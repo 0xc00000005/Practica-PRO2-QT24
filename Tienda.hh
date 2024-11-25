@@ -29,6 +29,8 @@ public:
     // Mostrar el subárbol correspondiente a un cliente
     void subarbol_cliente();
 
+    Cliente cliente_por_id(int id) const;
+
 private:
     // Árbol binario que representa las salas de la tienda
     BinTree<std::string> bintree_salas;

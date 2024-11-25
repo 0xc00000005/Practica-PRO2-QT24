@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <stdexcept>
 using namespace std;
 typedef BinTree<string> BT;
 
@@ -95,7 +96,8 @@ BinTree<string> Tienda::construir_subarbol(const vector<std::string>& camino) {
     return arbol;
 }
 
-Cliente Tienda::cliente_por_id(int id) const{
+// Implementación del método para obtener un cliente por su ID
+const Cliente& Tienda::obtener_cliente(int id) const {
     return clientes[id];
 }
 

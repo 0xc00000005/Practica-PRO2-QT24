@@ -17,7 +17,8 @@ int main() {
         } else if (instruccion == "quiere_comprar") {
             int id;
             cin >> id;
-            megathlon.cliente_por_id(id).desea();
+            const Cliente& cliente = megathlon.obtener_cliente(id);
+            cliente.desea();
         } else if (instruccion == "salas_a_visitar") {
             // Function call for salas_a_visitar
         } else if (instruccion == "pago_cliente") {

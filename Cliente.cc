@@ -1,11 +1,8 @@
 #include "Cliente.hh"
 
-// Inicialización del contador estático
-int Cliente::contador = 0;
 
 // Constructor por defecto
-Cliente::Cliente()
-    : id(++contador) {}
+Cliente::Cliente() {}
 
 // Constructor con parámetros
 Cliente::Cliente(const int id)
@@ -16,10 +13,6 @@ int Cliente::obtenerId() const {
     return id;
 }
 
-// Obtener el contador actual
-int Cliente::getContador() {
-    return contador;
-}
 
 void Cliente::desea() const {
     for(const auto& nombre : items){

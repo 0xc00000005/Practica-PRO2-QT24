@@ -17,7 +17,6 @@ public:
     int obtenerId() const;
 
     // Obtener el contador actual
-    static int getContador();
 
     void desea() const;
 
@@ -25,7 +24,7 @@ public:
 
 private:
     int id;
-    static int contador;
+    
     std::vector<std::string> items;
 };
 

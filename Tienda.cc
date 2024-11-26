@@ -11,6 +11,13 @@ Tienda::Tienda() {
     bintree_salas = BT();
 }
 
+int Tienda::contador=1;
+
+// Obtener el contador actual
+void Tienda::incrementar_contador() {
+    ++contador;
+}
+
 // Función auxiliar para encontrar el subarbol y registrar el camino con nombres y direcciones
 bool Tienda::encontrar_subarbol(const BT& arbol, const std::string& item, std::vector<std::string>& camino) {
     if (arbol.empty()) return false;
@@ -42,9 +49,9 @@ bool Tienda::encontrar_subarbol(const BT& arbol, const std::string& item, std::v
 }
 
 void Tienda::nuevo_cliente() {
-    Cliente nuevoCliente;
-    int id = nuevoCliente.obtenerId();
-
+    int id = contador;
+    Cliente nuevoCliente(id);
+    cout << "ID: " << id << endl;
     // Leer los items que el cliente desea
     std::vector<std::string> items;
     std::string item;
@@ -73,6 +80,7 @@ void Tienda::nuevo_cliente() {
         }
     }
     
+    //ID-1????
     clientes.push_back(nuevoCliente);
 }
 

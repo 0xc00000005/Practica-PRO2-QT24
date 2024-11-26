@@ -2,23 +2,24 @@
 #include "Caja.hh"
 #include "Tienda.hh"
 #include "Cliente.hh"
+#include "Cjt_clientes.hh"
 
 using namespace std;
 
 int main() {
     Tienda megathlon = Tienda();
+    Cjt_clientes cjtclientes = Cjt_clientes();
     megathlon.leer_salas();
     int prov;
     cin >> prov;
     string instruccion;
     while (instruccion != "fin") {
         if (instruccion == "nuevo_cliente") {
-            megathlon.nuevo_cliente();
+            cjtclientes.nuevo_cliente(megathlon.recuperar_arbol());
         } else if (instruccion == "quiere_comprar") {
             int id;
             cin >> id;
-            const Cliente& cliente = megathlon.obtener_cliente(id);
-            cout << "A" << endl;
+            const Cliente& cliente = cjtclientes.obtener_cliente(id);
             cliente.desea();
         } else if (instruccion == "salas_a_visitar") {
             // Function call for salas_a_visitar

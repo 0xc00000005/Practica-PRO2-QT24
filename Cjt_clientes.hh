@@ -15,6 +15,8 @@ public:
     void nuevo_cliente(const BinTree<std::string>& bintree_salas);
 
     // Recuperar un cliente por su ID (devuelve una referencia constante)
+    // Ambos const se utilizan para garantizar que ni el objeto devuelto 
+    // ni el objeto que llama a la función sean modificados, mejorando así la seguridad y la eficiencia del código.
     const Cliente& obtener_cliente(int id) const;
 
 private:

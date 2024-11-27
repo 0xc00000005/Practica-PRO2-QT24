@@ -100,6 +100,7 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
             // Mostrar el recorrido
             std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
             for (const std::string& paso : camino) {
+                nuevoCliente.pb_sala(paso);
                 std::cout << paso << std::endl;
             }
             std::cout << "back" << std::endl;
@@ -110,14 +111,13 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
 
     // Agregar el cliente al vector
     clientes.push_back(nuevoCliente);
-    nuevoCliente.guardar_salas(camino);
-
+    
     // Incrementar el contador
     incrementar_contador();
 }
 
 // Recuperar un cliente por su ID (devuelve una referencia constante)
-const Cliente& Cjt_clientes::obtener_cliente(int id) const {
+const Cliente& obtener_cliente(int id) const {
     if (id - 1 >= 0 && id - 1 < clientes.size()) {
         return clientes[id - 1];
     } else {

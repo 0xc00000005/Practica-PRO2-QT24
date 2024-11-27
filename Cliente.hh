@@ -26,10 +26,10 @@ public:
 
     void salas_a_visitar() const;
 
-    void Cliente::depurar_salas();
+   // void depurar_salas();
+   void pb_sala(const std::string& sala);
 
 private:
-    static bool depurado;
     int id;
     std::vector<std::string> guardado_salas_visitar;
     std::vector<std::string> items;

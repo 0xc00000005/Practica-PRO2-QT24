@@ -77,7 +77,7 @@ BinTree<string> Cjt_clientes::construir_subarbol(const vector<std::string>& cami
 void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     int id = contador;
     Cliente nuevoCliente(id);
-    std::cout << "ID: " << id << std::endl;
+    //std::cout << "ID: " << id << std::endl;
 
     // Leer los items que el cliente desea
     std::vector<std::string> items;
@@ -117,7 +117,7 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
 }
 
 // Recuperar un cliente por su ID (devuelve una referencia constante)
-const Cliente& obtener_cliente(int id) const {
+const Cliente& Cjt_clientes::obtener_cliente(int id) const {
     if (id - 1 >= 0 && id - 1 < clientes.size()) {
         return clientes[id - 1];
     } else {

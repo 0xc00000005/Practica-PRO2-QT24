@@ -30,7 +30,7 @@ void Cliente::guardar_salas(const std::vector<std::string>& salascin){
 }
 
 void Cliente::pb_sala(const std::string& sala){
-    if (sala != "back" || sala != "left" || sala != "right") salas_depuradas.push_back(sala);
+    if (sala != "back" and sala != "left" and sala != "right") salas_depuradas.push_back(sala);
 }
 
 /*

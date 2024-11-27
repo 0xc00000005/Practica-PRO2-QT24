@@ -110,6 +110,7 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
 
     // Agregar el cliente al vector
     clientes.push_back(nuevoCliente);
+    nuevoCliente.guardar_salas(camino);
 
     // Incrementar el contador
     incrementar_contador();

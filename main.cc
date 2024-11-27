@@ -22,7 +22,10 @@ int main() {
             const Cliente& cliente = cjtclientes.obtener_cliente(id);
             cliente.desea();
         } else if (instruccion == "salas_a_visitar") {
-            // Function call for salas_a_visitar
+            int id;
+            cin >> id;
+            const Cliente& cliente = cjtclientes.obtener_cliente(id);
+            cliente.salas_a_visitar();
         } else if (instruccion == "pago_cliente") {
             // Function call for pago_cliente
         } else if (instruccion == "escribir_caja") {

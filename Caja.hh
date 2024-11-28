@@ -11,14 +11,11 @@ public:
     // Constructor con identificador
     Caja(int id);
 
-    // Abrir la caja
-    void abrirCaja();
+    void asignar_cliente(const Cliente& cliente, const Hora& hora_actual);
 
-    // Cerrar la caja
-    void cerrarCaja();
+    int tiempo_espera_estimado() const;
 
-    // Verificar si la caja está abierta
-    bool estaAbierta() const;
+    int numero_clientes_en_cola() const;
 
     // Atender a un cliente
     void atenderCliente(const Cliente& cliente);
@@ -28,7 +25,11 @@ public:
 
 private:
     int idCaja;
-    bool abierta;
+    
+    int tiempo_espera;
+
+    std::queue<Cliente> cola_clientes;
+    
 };
 
 #endif // CAJA_HH

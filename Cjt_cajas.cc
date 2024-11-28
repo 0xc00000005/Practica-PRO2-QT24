@@ -36,11 +36,26 @@ void Cjt_cajas::imprimir_estado() const {
 int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
     int mejor_caja = -1;
     Hora menor_tiempo;
-    for(int i = 0; i < num_cajas; ++i){
-        if(cajas[i].esta_disponible(hora_actual)){
-            if(mejor_caja == -1 || cajas[i].get_proximo_libre() < menor_tiempo){
+    int menor_num_clientes = -1;
+
+    for (int i = 0; i < num_cajas; ++i) {
+        if (cajas[i].esta_disponible(hora_actual)) {
+            Hora tiempo_libre = cajas[i].get_proximo_libre();
+            int num_clientes = cajas[i].num_clientes_asignados();
+
+            if (mejor_caja == -1 || tiempo_libre < menor_tiempo) {
                 mejor_caja = i;
-                menor_tiempo = cajas[i].get_proximo_libre();
+                menor_tiempo = tiempo_libre;
+                menor_num_clientes = num_clientes;
+            } else if (tiempo_libre == menor_tiempo) {
+                if (num_clientes < menor_num_clientes) {
+                    mejor_caja = i;
+                    menor_num_clientes = num_clientes;
+                } else if (num_clientes == menor_num_clientes) {
+                    if (i < mejor_caja) {
+                        mejor_caja = i;
+                    }
+                }
             }
         }
     }

@@ -3,6 +3,7 @@
 #include "Tienda.hh"
 #include "Cliente.hh"
 #include "Cjt_clientes.hh"
+#include "Cjt_cajas.hh"
 
 using namespace std;
 
@@ -10,8 +11,10 @@ int main() {
     Tienda megathlon = Tienda();
     Cjt_clientes cjtclientes = Cjt_clientes();
     megathlon.leer_salas();
-    int prov;
-    cin >> prov;
+    Cjt_cajas cjtcajas = Cjt_cajas();
+    int n;
+    cin >> n;
+    cjtcajas.establecer_num_cajas(n);
     string instruccion;
     while (instruccion != "fin") {
         if (instruccion == "nuevo_cliente") {

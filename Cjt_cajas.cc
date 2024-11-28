@@ -66,3 +66,39 @@ int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
 void Cjt_cajas::actualizar_tiempo_caja(int id_caja) {
     cajas[id_caja].actualizar_libre();
 }
+
+
+void Cjt_cajas::expedir_ticket() const {
+    int id;
+    Hora hora_actual;
+    std::cin >> id >> hora_actual;
+
+    // Leer productos y cantidades
+    std::string producto;
+    int cantidad;
+    Cliente cliente(id);
+
+    while (std::cin >> producto && producto != "#") {
+        std::cin >> cantidad;
+        cliente.guardar_producto(producto, cantidad); // Método para guardar productos en Cliente
+    }
+
+    // Asignar caja al cliente
+    int id_caja = asignar_caja(cliente, hora_actual);
+
+    // Calcular hora de salida
+    Hora hora_salida = calcular_hora_salida(hora_actual, id_caja);
+
+    /*// Evitar tickets con el mismo instante
+    static Hora ultima_hora_ticket;
+    if (hora_actual == ultima_hora_ticket) {
+        hora_actual.incrementar(); // Suponiendo que incrementa un segundo
+    }
+    ultima_hora_ticket = hora_actual;*/
+
+    // Imprimir ticket
+    std::cout << "Cliente: " << id << std::endl;
+    std::cout << "Hora de recogida del ticket: " << hora_actual << std::endl;
+    std::cout << "Hora de salida de la tienda: " << hora_salida << std::endl;
+    std::cout << "Caja asignada: " << id_caja << std::endl;
+}

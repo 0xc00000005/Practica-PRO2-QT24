@@ -68,15 +68,13 @@ void Cjt_cajas::actualizar_tiempo_caja(int id_caja) {
 }
 
 
-void Cjt_cajas::expedir_ticket() const {
-    int id;
+void Cjt_cajas::expedir_ticket(const Cliente& cliente) const {
     Hora hora_actual;
-    std::cin >> id >> hora_actual;
+    std::cin >> hora_actual;
 
     // Leer productos y cantidades
     std::string producto;
     int cantidad;
-    Cliente cliente(id);
 
     while (std::cin >> producto && producto != "#") {
         std::cin >> cantidad;

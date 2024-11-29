@@ -30,7 +30,10 @@ int main() {
             const Cliente& cliente = cjtclientes.obtener_cliente(id);
             cliente.salas_a_visitar();
         } else if (instruccion == "pago_cliente") {
-            
+            int id;
+            cin >> id;
+            const Cliente& cliente = cjtclientes.obtener_cliente(id);
+            cjtcajas.expedir_ticket(cliente);
         } else if (instruccion == "escribir_caja") {
             // Function call for escribir_caja
         } else if (instruccion == "escribir_cajas") {

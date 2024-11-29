@@ -17,7 +17,7 @@ public:
 
     void imprimir_estado() const;
 
-    void expedir_ticket() const;
+    void expedir_ticket(const Cliente& cliente) const;
 
 private:
     int num_cajas;

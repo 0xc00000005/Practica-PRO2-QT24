@@ -64,3 +64,9 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
     // Update proximo_libre
     proximo_libre = tiempo;
 }
+
+void Caja::imprimir_estado() const {
+    std::cout << "ID Caja: " << idCaja << std::endl;
+    std::cout << "Proximo libre: " << proximo_libre << std::endl;
+    std::cout << "Clientes en cola: " << cola_clientes.size() << std::endl;
+}

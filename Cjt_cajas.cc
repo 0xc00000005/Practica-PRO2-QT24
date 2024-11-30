@@ -71,7 +71,8 @@ void Cjt_cajas::actualizar_tiempo_caja(int id_caja, const Hora& hora_actual) {
 void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     int id_cliente;
     Hora hora_actual;
-    std::cin >> id_cliente >> hora_actual;
+    std::cin >> id_cliente;
+    hora_actual.leer_hora();
 
     // Retrieve the existing client
     Cliente& cliente = clientes.obtener_cliente(id_cliente);
@@ -90,7 +91,11 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
 
     // Imprimir ticket
     std::cout << "Cliente: " << id_cliente << std::endl;
-    std::cout << "Hora de recogida del ticket: " << hora_actual << std::endl;
-    std::cout << "Hora de salida de la tienda: " << hora_salida << std::endl;
+    std::cout << "Hora de recogida del ticket: ";
+    hora_actual.escribir_hora();
+    cout << std::endl;
+    std::cout << "Hora de salida de la tienda: ";
+    hora_salida.escribir_hora();
+    cout << std::endl;
     std::cout << "Caja asignada: " << id_caja + 1 << std::endl;
 }

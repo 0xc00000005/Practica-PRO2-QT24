@@ -33,6 +33,7 @@ public:
 
     void actualizar_libre(const Hora& hora_actual);
 
+    void imprimir_estado() const;
 
 private:
     int idCaja;

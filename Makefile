@@ -10,7 +10,7 @@ SRCS = main.cc Tienda.cc Cliente.cc Cjt_clientes.cc Hora.cc Cjt_cajas.cc Caja.cc
 OBJS = $(SRCS:.cc=.o)
 
 # Archivos de encabezado
-HDRS = BinTree.hh Caja.hh Cliente.hh Cjt_clientes.hh Hora.hh PRO2Excepcio.hh Sala.hh Tienda.hh Cjt_cajas.hh Caja.hh
+HDRS = BinTree.hh Caja.hh Cliente.hh Cjt_clientes.hh Hora.hh PRO2Excepcio.hh Tienda.hh Cjt_cajas.hh Caja.hh
 
 # Regla por defecto
 all: $(TARGET)

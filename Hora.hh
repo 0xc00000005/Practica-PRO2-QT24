@@ -19,7 +19,7 @@ public:
 
 	void leer_hora();
 
-	bool menor(Hora h);
+	bool menor(Hora h) const;
 
 	bool igual(Hora h);
 

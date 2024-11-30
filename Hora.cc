@@ -21,7 +21,7 @@ void Hora::leer_hora()
 	cin >> segundos;
 }
 
-bool Hora::menor(Hora h)
+bool Hora::menor(Hora h) const
 {
 	return horas < h.horas or (horas == h.horas and minutos < h.minutos) or (horas == h.horas and minutos == h.minutos and segundos < h.segundos);
 }

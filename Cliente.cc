@@ -25,23 +25,16 @@ void Cliente::guardar_items(const std::vector<std::string>& itemscin){
     items=itemscin;
 }
 
-void Cliente::guardar_salas(const std::vector<std::string>& salascin){
-    guardado_salas_visitar=salascin;
+void Cliente::guardar_items_comprados(const std::vector<std::string>& itcmcin){
+    items_comprados=itcmcin;
 }
+
 
 void Cliente::pb_sala(const std::string& sala){
     if (sala != "back" and sala != "left" and sala != "right") salas_depuradas.push_back(sala);
 }
 
-/*
-void Cliente::depurar_salas() {
-    for (auto sala : guardado_salas_visitar) {
-        if (sala != "back" || sala != "left" || sala != "right") {
-            salas_depuradas.push_back(sala);
-        }
-    }
-}
-*/
+
 void Cliente::salas_a_visitar() const {
     for(const auto& nombre : salas_depuradas){
         std::cout << nombre << std::endl;

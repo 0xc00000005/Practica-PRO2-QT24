@@ -75,24 +75,16 @@ void Cjt_cajas::expedir_ticket(const Cliente& cliente) const {
     // Leer productos y cantidades
     std::string producto;
     int cantidad;
+    int tiempo_pago=0;
 
     while (std::cin >> producto && producto != "#") {
         std::cin >> cantidad;
-        cliente.guardar_producto(producto, cantidad); // Método para guardar productos en Cliente
+        tiempo_pago+=cantidad;
+        cliente.guardar_items_comprados(producto); // Método para guardar productos en Cliente
     }
-
+-
     // Asignar caja al cliente
     int id_caja = asignar_caja(cliente, hora_actual);
-
-    // Calcular hora de salida
-    Hora hora_salida = calcular_hora_salida(hora_actual, id_caja);
-
-    /*// Evitar tickets con el mismo instante
-    static Hora ultima_hora_ticket;
-    if (hora_actual == ultima_hora_ticket) {
-        hora_actual.incrementar(); // Suponiendo que incrementa un segundo
-    }
-    ultima_hora_ticket = hora_actual;*/
 
     // Imprimir ticket
     std::cout << "Cliente: " << id << std::endl;

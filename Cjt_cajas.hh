@@ -1,3 +1,6 @@
+#ifndef CJT_CAJAS_HH
+#define CJT_CAJAS_HH
+
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -27,4 +30,6 @@ private:
     int buscar_mejor_caja(const Hora& hora_actual) const;
 
     void actualizar_tiempo_caja(int id_caja);
-}
+};
+
+#endif

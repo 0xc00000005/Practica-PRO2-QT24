@@ -22,18 +22,18 @@ public:
 
     void guardar_items(const std::vector<std::string>& itemscin);
 
-    void guardar_salas(const std::vector<std::string>& salascin);
+    void guardar_items_comprados(const std::vector<std::string>& itcmcin);
 
     void salas_a_visitar() const;
 
    // void depurar_salas();
    void pb_sala(const std::string& sala);
 
+
 private:
     int id;
-    std::vector<std::string> guardado_salas_visitar;
     std::vector<std::string> items;
-    // Se necesita?
+    std::vector<std::string> items_comprados;
     std::vector<std::string> salas_depuradas;
 };
 

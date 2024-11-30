@@ -2,6 +2,8 @@
 #define CAJA_HH
 
 #include "Cliente.hh"
+#include "Hora.hh"
+#include <queue>
 
 class Caja {
 public:

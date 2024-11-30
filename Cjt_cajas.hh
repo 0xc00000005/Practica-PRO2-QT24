@@ -17,7 +17,7 @@ public:
 
     int asignar_caja(const Cliente& cliente, const Hora& hora_actual);
 
-    Hora calcular_hora_salida(const Hora& hora_actual, int id_caja);
+    //Hora calcular_hora_salida(const Hora& hora_actual, int id_caja);
 
     void imprimir_estado() const;
 
@@ -33,7 +33,7 @@ private:
 
     int buscar_mejor_caja(const Hora& hora_actual) const;
 
-    void actualizar_tiempo_caja(int id_caja);
+    void actualizar_tiempo_caja(int id_caja, const Hora& hora_actual);
 };
 
 #endif

@@ -31,6 +31,9 @@ public:
     // Obtener el identificador de la caja
     int obtenerId() const;
 
+    void actualizar_libre(const Hora& hora_actual);
+
+
 private:
     int idCaja;
     Hora proximo_libre; // Hora en que la caja estará libre

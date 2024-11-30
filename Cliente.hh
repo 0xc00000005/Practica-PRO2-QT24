@@ -18,6 +18,7 @@ public:
     int numero_productos() const;
 
     // Otros métodos...
+    int obtenerId() const;
     void desea() const;
     void guardar_items(const std::vector<std::string>& itemscin);
     void guardar_items_comprados(const std::vector<std::string>& itcmcin);

@@ -44,3 +44,23 @@ bool Caja::esta_disponible(const Hora& hora_actual) const {
 int Caja::obtenerId() const {
     return idCaja;
 }
+
+void Caja::actualizar_libre(const Hora& hora_actual) {
+    // Recalculate proximo_libre based on the clients in the queue
+
+    // Start from the current time or the existing proximo_libre, whichever is later
+    Hora tiempo = (proximo_libre < hora_actual) ? hora_actual : proximo_libre;
+
+    // Calculate the total service time for clients in the queue
+    std::queue<Cliente> temp_queue = cola_clientes;
+    while (!temp_queue.empty()) {
+        Cliente cliente = temp_queue.front();
+        temp_queue.pop();
+
+        int tiempo_atencion = 10 + cliente.numero_productos(); // 10 seconds + 1 second per product
+        tiempo = tiempo + tiempo_atencion;
+    }
+
+    // Update proximo_libre
+    proximo_libre = tiempo;
+}

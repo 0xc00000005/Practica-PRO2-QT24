@@ -15,15 +15,15 @@ int Cjt_cajas::asignar_caja(const Cliente& cliente, const Hora& hora_actual) {
     int id_caja = buscar_mejor_caja(hora_actual);
     if (id_caja != -1) {
         cajas[id_caja].asignar_cliente(cliente, hora_actual);
-        actualizar_tiempo_caja(id_caja);
+        actualizar_tiempo_caja(id_caja, hora_actual);
     }
     return id_caja;
 }
 
-// Calcular hora de salida
+/* Calcular hora de salida
 Hora Cjt_cajas::calcular_hora_salida(const Hora& hora_actual, int id_caja) {
     return cajas[id_caja].calcular_salida(hora_actual);
-}
+}*/
 
 // Imprimir estado de las cajas
 void Cjt_cajas::imprimir_estado() const {
@@ -64,8 +64,8 @@ int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
 }
 
 // Actualizar el tiempo de la caja después de asignar un cliente
-void Cjt_cajas::actualizar_tiempo_caja(int id_caja) {
-    cajas[id_caja].actualizar_libre();
+void Cjt_cajas::actualizar_tiempo_caja(int id_caja, const Hora& hora_actual) {
+    cajas[id_caja].actualizar_libre(hora_actual);
 }
 
 void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {

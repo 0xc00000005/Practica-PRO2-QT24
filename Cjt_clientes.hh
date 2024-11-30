@@ -19,6 +19,9 @@ public:
     // ni el objeto que llama a la función sean modificados, mejorando así la seguridad y la eficiencia del código.
     const Cliente& obtener_cliente(int id) const;
 
+    // Method to get a modifiable reference to a client
+    Cliente& obtener_cliente(int id);
+
 private:
     // Contador estático para generar IDs
     static int contador;

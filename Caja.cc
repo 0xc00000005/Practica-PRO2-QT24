@@ -2,31 +2,43 @@
 #include <queue>
 
 // Constructor por defecto
-Caja::Caja() : idCaja(0), tiempo_espera(0) {}
+Caja::Caja() : idCaja(0), proximo_libre(0, 0, 0) {}
 
 // Constructor con identificador
-Caja::Caja(int id) : idCaja(id), tiempo_espera(0) {}
+Caja::Caja(int id) : idCaja(id), proximo_libre(0, 0, 0) {}
 
 void Caja::asignar_cliente(const Cliente& cliente, const Hora& hora_actual) {
+    // Calcular tiempo de atención para este cliente
+    int tiempo_atencion = 10 + cliente.numero_productos(); // 10 segundos + 1 segundo por producto
+
+    // Actualizar el tiempo en que la caja estará libre
+    if (proximo_libre < hora_actual) {
+        proximo_libre = hora_actual;
+    }
+    proximo_libre = proximo_libre + tiempo_atencion;
+
+    // Agregar el cliente a la cola
     cola_clientes.push(cliente);
-    // Suponiendo que el tiempo de espera se incrementa por cada cliente añadido
-    tiempo_espera += cliente.tiempo_transaccion();
 }
 
-int Caja::tiempo_espera_estimado() const {
-    return tiempo_espera;
+int Caja::tiempo_espera_estimado(const Hora& hora_actual) const {
+    if (proximo_libre < hora_actual) {
+        return 0;
+    }
+    return proximo_libre - hora_actual;
 }
 
-int Caja::numero_clientes_en_cola() const {
+Hora Caja::get_proximo_libre() const {
+    return proximo_libre;
+}
+
+int Caja::num_clientes_asignados() const {
     return cola_clientes.size();
 }
 
-void Caja::atenderCliente(const Cliente& cliente) {
-    if (!cola_clientes.empty()) {
-        cola_clientes.pop();
-        // Suponiendo que el tiempo de espera se reduce por cada cliente atendido
-        tiempo_espera -= cliente.tiempo_transaccion();
-    }
+bool Caja::esta_disponible(const Hora& hora_actual) const {
+    // Aquí puedes implementar lógica adicional si hay horarios de apertura/cierre
+    return true;
 }
 
 int Caja::obtenerId() const {

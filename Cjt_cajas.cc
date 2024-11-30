@@ -1,4 +1,5 @@
 #include "Cjt_cajas.hh"
+#include "Cjt_clientes.hh"
 
 // Constructor
 Cjt_cajas::Cjt_cajas() : num_cajas(0) {}
@@ -35,19 +36,19 @@ void Cjt_cajas::imprimir_estado() const {
 // Buscar la mejor caja disponible
 int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
     int mejor_caja = -1;
-    Hora menor_tiempo;
+    int menor_tiempo_espera = -1;
     int menor_num_clientes = -1;
 
     for (int i = 0; i < num_cajas; ++i) {
         if (cajas[i].esta_disponible(hora_actual)) {
-            Hora tiempo_libre = cajas[i].get_proximo_libre();
+            int tiempo_espera = cajas[i].tiempo_espera_estimado(hora_actual);
             int num_clientes = cajas[i].num_clientes_asignados();
 
-            if (mejor_caja == -1 || tiempo_libre < menor_tiempo) {
+            if (mejor_caja == -1 || tiempo_espera < menor_tiempo_espera) {
                 mejor_caja = i;
-                menor_tiempo = tiempo_libre;
+                menor_tiempo_espera = tiempo_espera;
                 menor_num_clientes = num_clientes;
-            } else if (tiempo_libre == menor_tiempo) {
+            } else if (tiempo_espera == menor_tiempo_espera) {
                 if (num_clientes < menor_num_clientes) {
                     mejor_caja = i;
                     menor_num_clientes = num_clientes;
@@ -67,28 +68,29 @@ void Cjt_cajas::actualizar_tiempo_caja(int id_caja) {
     cajas[id_caja].actualizar_libre();
 }
 
-
-void Cjt_cajas::expedir_ticket(const Cliente& cliente) const {
+void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
+    int id_cliente;
     Hora hora_actual;
-    std::cin >> hora_actual;
+    std::cin >> id_cliente >> hora_actual;
+
+    // Retrieve the existing client
+    Cliente& cliente = clientes.obtener_cliente(id_cliente);
 
     // Leer productos y cantidades
     std::string producto;
     int cantidad;
-    int tiempo_pago=0;
-
     while (std::cin >> producto && producto != "#") {
         std::cin >> cantidad;
-        tiempo_pago+=cantidad;
-        cliente.guardar_items_comprados(producto); // Método para guardar productos en Cliente
+        cliente.guardar_producto(producto, cantidad);
     }
--
+
     // Asignar caja al cliente
     int id_caja = asignar_caja(cliente, hora_actual);
+    Hora hora_salida = cajas[id_caja].get_proximo_libre();
 
     // Imprimir ticket
-    std::cout << "Cliente: " << id << std::endl;
+    std::cout << "Cliente: " << id_cliente << std::endl;
     std::cout << "Hora de recogida del ticket: " << hora_actual << std::endl;
     std::cout << "Hora de salida de la tienda: " << hora_salida << std::endl;
-    std::cout << "Caja asignada: " << id_caja << std::endl;
+    std::cout << "Caja asignada: " << id_caja + 1 << std::endl;
 }

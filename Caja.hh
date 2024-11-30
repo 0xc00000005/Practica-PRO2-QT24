@@ -13,25 +13,28 @@ public:
     // Constructor con identificador
     Caja(int id);
 
+    // Asignar un cliente a la caja
     void asignar_cliente(const Cliente& cliente, const Hora& hora_actual);
 
-    int tiempo_espera_estimado() const;
+    // Obtener el tiempo de espera estimado para un nuevo cliente
+    int tiempo_espera_estimado(const Hora& hora_actual) const;
 
-    int numero_clientes_en_cola() const;
+    // Obtener el próximo tiempo libre de la caja
+    Hora get_proximo_libre() const;
 
-    // Atender a un cliente
-    void atenderCliente(const Cliente& cliente);
+    // Obtener el número de clientes en cola
+    int num_clientes_asignados() const;
+
+    // Verificar si la caja está disponible en la hora actual
+    bool esta_disponible(const Hora& hora_actual) const;
 
     // Obtener el identificador de la caja
     int obtenerId() const;
 
 private:
     int idCaja;
-    
-    int tiempo_espera;
-
-    std::queue<Cliente> cola_clientes;
-    
+    Hora proximo_libre; // Hora en que la caja estará libre
+    std::queue<Cliente> cola_clientes; // Cola de clientes
 };
 
 #endif // CAJA_HH

@@ -124,3 +124,11 @@ const Cliente& Cjt_clientes::obtener_cliente(int id) const {
         throw std::out_of_range("Cliente no encontrado");
     }
 }
+
+Cliente& Cjt_clientes::obtener_cliente(int id) {
+    if (id - 1 >= 0 && id - 1 < clientes.size()) {
+        return clientes[id - 1];
+    } else {
+        throw std::out_of_range("Cliente no encontrado");
+    }
+}

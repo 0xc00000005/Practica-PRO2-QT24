@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Hora.hh"
 #include "Caja.hh"
+#include "Cjt_clientes.hh"
 
 class Cjt_cajas {
 public:
@@ -21,6 +22,9 @@ public:
     void imprimir_estado() const;
 
     void expedir_ticket(const Cliente& cliente) const;
+
+    // Updated function declaration
+    void expedir_ticket(Cjt_clientes& clientes);
 
 private:
     int num_cajas;

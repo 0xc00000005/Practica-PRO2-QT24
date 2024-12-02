@@ -23,6 +23,7 @@ void Caja::asignar_cliente(const Cliente& cliente, const Hora& hora_actual) {
 
     // Add the client and their departure time to the queue
     cola_clientes.push(std::make_pair(cliente, hora_salida));
+}
 
 int Caja::tiempo_espera_estimado(const Hora& hora_actual) const {
     if (proximo_libre.menor(hora_actual)) {
@@ -58,13 +59,10 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
     Hora tiempo = (proximo_libre.menor(hora_actual)) ? hora_actual : proximo_libre;
 
     // Calculate the total service time for clients in the queue
-    std::queue<Cliente> temp_queue = cola_clientes;
+    std::queue<std::pair<Cliente, Hora>> temp_queue = cola_clientes;
     while (!temp_queue.empty()) {
-        Cliente cliente = temp_queue.front();
+        std::pair<Cliente, Hora> cliente_con_salida = temp_queue.front();
         temp_queue.pop();
-
-        //int tiempo_atencion = 10 + cliente.numero_productos(); // 10 seconds + 1 second per product
-        //tiempo.sumar_segundos(tiempo_atencion);
     }
 
     // Update proximo_libre
@@ -72,16 +70,17 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
 }
 
 void Caja::escribir_caja(const Hora& hora) {
-    std::cout << "Caja " << idCaja << ": ";
 
     std::queue<std::pair<Cliente, Hora>> temp_queue = cola_clientes;
 
     while (!temp_queue.empty()) {
         const std::pair<Cliente, Hora>& cliente_con_salida = temp_queue.front();
 
-        // If the client is still in the caja at the given time
+        // Check if the client is still in the queue at the given time
         if (hora.menor(cliente_con_salida.second)) {
+            // Output client ID
             std::cout << cliente_con_salida.first.obtenerId() << " ";
+            // Output client's departure time
             cliente_con_salida.second.escribir_hora();
             std::cout << " ";
         }

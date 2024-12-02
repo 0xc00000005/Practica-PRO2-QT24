@@ -93,8 +93,17 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     std::cout << std::endl;
 }
 
-void Cjt_cajas::escribir_caja(int id_caja) {
+void Cjt_cajas::escribir_caja_singular(int id_caja) {
     Hora hora;
     hora.leer_hora();
     cajas[id_caja-1].escribir_caja(hora);
+}
+
+void escribir_cajas_plural() {
+    Hora hora;
+    hora.leer_hora();
+    for (int i = 0; i < num_cajas; ++i) {
+        std::cout << "Caja " << i + 1 << ": ";
+        cajas[i].escribir_caja(hora);
+    }
 }

@@ -27,7 +27,7 @@ void Cliente::guardar_items_comprados(const std::vector<std::string>& itcmcin){
 }
 
 void Cliente::pb_sala(const std::string& sala){
-    if (sala != "back" and sala != "left" and sala != "right") salas_depuradas.push_back(sala);
+    salas_depuradas.insert(sala);
 }
 
 void Cliente::salas_a_visitar() const {

@@ -56,5 +56,12 @@
         "map": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
-    "C_Cpp.default.compilerPath": "/usr/bin/g++"
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/martincillo/Documents/Práctica PRO2",
+            "binaryPath": "/home/martincillo/Documents/Práctica PRO2/a.out",
+            "binaryArgs": []
+        }
+    ]
 }

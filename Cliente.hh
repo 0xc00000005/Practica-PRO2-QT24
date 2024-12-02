@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 
 class Cliente {
 public:
@@ -30,7 +31,7 @@ private:
     std::vector<std::pair<std::string, int>> productos; // Lista de productos y cantidades
     std::vector<std::string> items;
     std::vector<std::string> items_comprados;
-    std::vector<std::string> salas_depuradas;
+    std::set<std::string> salas_depuradas;
 };
 
 #endif // CLIENTE_HH

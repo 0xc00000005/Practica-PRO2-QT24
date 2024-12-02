@@ -100,7 +100,8 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
             // Mostrar el recorrido
             std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
             for (const std::string& paso : camino) {
-                nuevoCliente.pb_sala(paso);
+                // Hacer if aquí
+                if (paso != "back" and paso != "left" and paso != "right") nuevoCliente.pb_sala(paso);
                 std::cout << paso << std::endl;
             }
             std::cout << "back" << std::endl;

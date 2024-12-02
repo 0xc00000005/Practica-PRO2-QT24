@@ -32,7 +32,9 @@ int main() {
         } else if (instruccion == "pago_cliente") {
             cjtcajas.expedir_ticket(cjtclientes);
         } else if (instruccion == "escribir_caja") {
-            // Function call for escribir_caja
+            int id;
+            cin >> id;
+            cjtcajas.escribir_caja(id);
         } else if (instruccion == "escribir_cajas") {
             // Function call for escribir_cajas
         } else if (instruccion == "compra_y_no_quiere") {

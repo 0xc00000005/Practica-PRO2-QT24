@@ -68,10 +68,19 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
     proximo_libre = tiempo;
 }
 
-void Caja::imprimir_estado() const {
-    std::cout << "ID Caja: " << idCaja << std::endl;
-    std::cout << "Proximo libre: ";
-    proximo_libre.escribir_hora();
-    cout << std::endl;
-    std::cout << "Clientes en cola: " << cola_clientes.size() << std::endl;
+void Caja::escribir_caja(const Hora& hora) {
+    std::queue<Cliente> temp_queue = cola_clientes;
+    Hora tiempo_actual = (proximo_libre.menor(hora)) ? hora : proximo_libre;
+
+    while (!temp_queue.empty()) {
+        Cliente cliente = temp_queue.front();
+        temp_queue.pop();
+
+        int tiempo_atencion = 14 + cliente.numero_productos(); // 14 seconds + 1 second per product
+        tiempo_actual.sumar_segundos(tiempo_atencion);
+
+        std::cout << "Cliente " << cliente.obtenerId() << " saldrá a las ";
+        tiempo_actual.escribir_hora();
+        std::cout << std::endl;
+    }
 }

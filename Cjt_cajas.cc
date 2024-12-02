@@ -25,13 +25,7 @@ Hora Cjt_cajas::calcular_hora_salida(const Hora& hora_actual, int id_caja) {
     return cajas[id_caja].calcular_salida(hora_actual);
 }*/
 
-// Imprimir estado de las cajas
-void Cjt_cajas::imprimir_estado() const {
-    for(int i = 0; i < num_cajas; ++i){
-        std::cout << "Caja " << i+1 << ": ";
-        cajas[i].imprimir_estado();
-    }
-}
+
 
 // Buscar la mejor caja disponible
 int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
@@ -97,4 +91,10 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     std::cout << " y saldrá a las ";
     hora_salida.escribir_hora();
     std::cout << std::endl;
+}
+
+void Cjt_cajas::escribir_caja(int id_caja) const {
+    Hora hora;
+    hora.leer_hora();
+    cajas[id_caja-1].escribir_caja(hora);
 }

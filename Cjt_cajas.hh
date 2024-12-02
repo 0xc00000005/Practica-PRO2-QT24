@@ -19,12 +19,12 @@ public:
 
     //Hora calcular_hora_salida(const Hora& hora_actual, int id_caja);
 
-    void imprimir_estado() const;
-
     void expedir_ticket(const Cliente& cliente) const;
 
     // Updated function declaration
     void expedir_ticket(Cjt_clientes& clientes);
+
+    void escribir_caja(int id_caja) const;
 
 private:
     int num_cajas;

@@ -34,9 +34,9 @@ int main() {
         } else if (instruccion == "escribir_caja") {
             int id;
             cin >> id;
-            cjtcajas.escribir_caja(id);
+            cjtcajas.escribir_caja_singular(id);
         } else if (instruccion == "escribir_cajas") {
-            // Function call for escribir_cajas
+            cjtcajas.escribir_cajas_plural();
         } else if (instruccion == "compra_y_no_quiere") {
             // Function call for compra_y_no_quiere
         } else if (instruccion == "compran_y_no_quieren") {

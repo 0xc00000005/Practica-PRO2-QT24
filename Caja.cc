@@ -9,7 +9,7 @@ Caja::Caja(int id) : idCaja(id), proximo_libre(0, 0, 0) {}
 
 void Caja::asignar_cliente(const Cliente& cliente, const Hora& hora_actual) {
     // Calcular tiempo de atención para este cliente
-    int tiempo_atencion = 10 + cliente.numero_productos(); // 10 segundos + 1 segundo por producto
+    int tiempo_atencion = 14 + cliente.numero_productos(); // 10 segundos + 1 segundo por producto
 
     // Actualizar el tiempo en que la caja estará libre
     if (proximo_libre.menor(hora_actual)) {
@@ -60,8 +60,8 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
         Cliente cliente = temp_queue.front();
         temp_queue.pop();
 
-        int tiempo_atencion = 10 + cliente.numero_productos(); // 10 seconds + 1 second per product
-        tiempo.sumar_segundos(tiempo_atencion);
+        //int tiempo_atencion = 10 + cliente.numero_productos(); // 10 seconds + 1 second per product
+        //tiempo.sumar_segundos(tiempo_atencion);
     }
 
     // Update proximo_libre

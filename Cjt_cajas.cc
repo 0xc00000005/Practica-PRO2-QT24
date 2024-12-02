@@ -72,9 +72,10 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     int id_cliente;
     Hora hora_actual;
     std::cin >> id_cliente;
+    // Se lee hora actual
     hora_actual.leer_hora();
 
-    // Retrieve the existing client
+    // Se recoge cliente actual
     Cliente& cliente = clientes.obtener_cliente(id_cliente);
 
     // Leer productos y cantidades
@@ -86,6 +87,7 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     }
 
     // Asignar caja al cliente
+    // Tiene punta que ahí está el fallo
     int id_caja = asignar_caja(cliente, hora_actual);
     Hora hora_salida = cajas[id_caja].get_proximo_libre();
 

@@ -4,6 +4,7 @@
 #include "Cliente.hh"
 #include "Hora.hh"
 #include <queue>
+#include <utility>
 
 class Caja {
 public:
@@ -39,7 +40,7 @@ public:
 private:
     int idCaja;
     Hora proximo_libre; // Hora en que la caja estará libre
-    std::queue<Cliente> cola_clientes; // Cola de clientes
+    std::queue<std::pair<Cliente, Hora>> cola_clientes; // Queue of clients with their departure times
 };
 
 #endif // CAJA_HH

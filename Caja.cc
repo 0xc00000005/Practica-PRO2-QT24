@@ -8,18 +8,21 @@ Caja::Caja() : idCaja(0), proximo_libre(0, 0, 0) {}
 Caja::Caja(int id) : idCaja(id), proximo_libre(0, 0, 0) {}
 
 void Caja::asignar_cliente(const Cliente& cliente, const Hora& hora_actual) {
-    // Calcular tiempo de atención para este cliente
-    int tiempo_atencion = 14 + cliente.numero_productos(); // 10 segundos + 1 segundo por producto
+    // Calculate service time for this client
+    int tiempo_atencion = 14 + cliente.numero_productos(); // 14 seconds + 1 second per product
 
-    // Actualizar el tiempo en que la caja estará libre
+    // Update the time when the caja will be free
     if (proximo_libre.menor(hora_actual)) {
         proximo_libre = hora_actual;
     }
-   proximo_libre.sumar_segundos(tiempo_atencion);
 
-    // Agregar el cliente a la cola
-    cola_clientes.push(cliente);
-}
+    // Calculate the client's departure time
+    Hora hora_salida = proximo_libre;
+    hora_salida.sumar_segundos(tiempo_atencion);
+    proximo_libre = hora_salida;
+
+    // Add the client and their departure time to the queue
+    cola_clientes.push(std::make_pair(cliente, hora_salida));
 
 int Caja::tiempo_espera_estimado(const Hora& hora_actual) const {
     if (proximo_libre.menor(hora_actual)) {
@@ -69,18 +72,22 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
 }
 
 void Caja::escribir_caja(const Hora& hora) {
-    std::queue<Cliente> temp_queue = cola_clientes;
-    Hora tiempo_actual = (proximo_libre.menor(hora)) ? hora : proximo_libre;
+    std::cout << "Caja " << idCaja << ": ";
+
+    std::queue<std::pair<Cliente, Hora>> temp_queue = cola_clientes;
 
     while (!temp_queue.empty()) {
-        Cliente cliente = temp_queue.front();
+        const std::pair<Cliente, Hora>& cliente_con_salida = temp_queue.front();
+
+        // If the client is still in the caja at the given time
+        if (hora.menor(cliente_con_salida.second)) {
+            std::cout << cliente_con_salida.first.obtenerId() << " ";
+            cliente_con_salida.second.escribir_hora();
+            std::cout << " ";
+        }
+
         temp_queue.pop();
-
-        int tiempo_atencion = 14 + cliente.numero_productos(); // 14 seconds + 1 second per product
-        tiempo_actual.sumar_segundos(tiempo_atencion);
-
-        std::cout << "Cliente " << cliente.obtenerId() << " saldrá a las ";
-        tiempo_actual.escribir_hora();
-        std::cout << std::endl;
     }
+
+    std::cout << std::endl;
 }

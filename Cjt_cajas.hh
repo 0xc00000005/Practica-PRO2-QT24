@@ -24,7 +24,7 @@ public:
     // Updated function declaration
     void expedir_ticket(Cjt_clientes& clientes);
 
-    void escribir_caja(int id_caja) const;
+    void escribir_caja(int id_caja);
 
 private:
     int num_cajas;

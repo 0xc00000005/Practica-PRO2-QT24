@@ -92,8 +92,8 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     Hora hora_salida = cajas[id_caja].get_proximo_libre();
 
     // Imprimir ticket
-    std::cout << "Cliente " << id_cliente << "compra " << cliente.numero_productos() << " items" << std::endl;
-    std::cout << "Cliente " << id_cliente << " va a caja" << (id_caja + 1);
+    std::cout << "Cliente " << id_cliente << " compra " << cliente.numero_productos() << " items" << std::endl;
+    std::cout << "Cliente " << id_cliente << " va a caja " << (id_caja + 1);
     std::cout << " y saldrá a las ";
     hora_salida.escribir_hora();
     std::cout << std::endl;

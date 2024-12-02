@@ -99,7 +99,7 @@ void Cjt_cajas::escribir_caja_singular(int id_caja) {
     cajas[id_caja-1].escribir_caja(hora);
 }
 
-void escribir_cajas_plural() {
+void Cjt_cajas::escribir_cajas_plural() {
     Hora hora;
     hora.leer_hora();
     for (int i = 0; i < num_cajas; ++i) {

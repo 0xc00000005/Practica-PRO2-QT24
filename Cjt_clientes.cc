@@ -238,7 +238,7 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     BinTree<std::string> subarbol = construir_subarbol_minimo(bintree_salas, nodos_incluidos);
 
     // Display the subtree
-    std::cout << "Subárbol del cliente " << id << ":\n";
+    std::cout << "Subarbol del cliente " << id << ":\n";
     subarbol.setOutputFormat(BT::VISUALFORMAT);
     std::cout << subarbol << std::endl;
 

@@ -1,5 +1,6 @@
 #include "Cliente.hh"
 #include "Cjt_clientes.hh"
+#include <algorithm>
 
 // Constructor por defecto
 Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr) {}
@@ -42,7 +43,7 @@ void Cliente::salas_a_visitar() const {
 
 void Cliente::guardar_producto(const std::string& producto, int cantidad) {
     // Check if the product exists in 'salas_depuradas'
-    if (salas_depuradas.find(producto) == salas_depuradas.end()) {
+    if (std::find(items.begin(), items.end(), producto) == items.end()) {
         // Product not found in 'salas_depuradas', increase 'productos_no_deseados'
         productos_no_deseados += cantidad;
         // Notify Cjt_clientes

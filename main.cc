@@ -38,7 +38,7 @@ int main() {
         } else if (instruccion == "escribir_caja") {
             int id;
             cin >> id;
-            cout << "#escribir_caja " << id;
+            cout << "#escribir_caja " << id << " ";
             cjtcajas.escribir_caja_singular(id);
         } else if (instruccion == "escribir_cajas") {
             cout << "#escribir_cajas ";
@@ -52,11 +52,10 @@ int main() {
         } else if (instruccion == "compran_y_no_quieren") {
             cout << "#compran_y_no_quieren " << endl;
             cjtclientes.imprimir_clientes_con_productos_no_deseados();
-        } else if (instruccion == "fin") {
-            break;
         }
         cout << endl;
         cin >> instruccion;
     }
+    cout << "#fin" << endl;
     return 0;
 }

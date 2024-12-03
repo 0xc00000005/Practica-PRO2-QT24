@@ -32,10 +32,13 @@ private:
 
     // Incrementar contador
     void incrementar_contador();
+    std::vector<std::string> combinar_caminos_en_orden(const std::vector<std::vector<std::string>>& caminos);
 
     // Funciones auxiliares
     bool encontrar_subarbol(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino);
     BinTree<std::string> construir_subarbol(const std::vector<std::string>& camino);
+
+    bool encontrar_camino(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino);
 
     // Function to find all paths to the desired items
     void encontrar_todos_los_caminos(const BinTree<std::string>& arbol, const std::vector<std::string>& items, std::vector<std::string>& camino_actual, std::vector<std::vector<std::string>>& caminos_resultantes);

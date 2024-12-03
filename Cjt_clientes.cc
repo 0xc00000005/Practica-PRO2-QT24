@@ -54,7 +54,7 @@ bool Cjt_clientes::encontrar_subarbol(const BT& arbol, const std::string& item, 
     return false;
 }
 
-// Función para construir el subárbol a partir del camino
+// Función para construir el subarbol a partir del camino
 BinTree<string> Cjt_clientes::construir_subarbol(const vector<std::string>& camino) {
     if (camino.empty()) return BT();
 
@@ -136,7 +136,40 @@ std::vector<std::string> Cjt_clientes::combinar_caminos(const std::vector<std::v
     return recorrido;
 }
 
-// Función para construir el subárbol mínimo que contiene todos los items
+// Function to combine paths into a single traversal
+std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vector<std::vector<std::string>>& caminos) {
+    std::vector<std::string> recorrido;
+    if (caminos.empty()) return recorrido;
+
+    recorrido = caminos[0]; // Start with the path to the first item
+
+    for (size_t i = 1; i < caminos.size(); ++i) {
+        const auto& prev_camino = caminos[i - 1];
+        const auto& curr_camino = caminos[i];
+
+        // Find the common prefix length
+        size_t j = 0;
+        while (j < prev_camino.size() && j < curr_camino.size() && prev_camino[j] == curr_camino[j]) {
+            ++j;
+        }
+
+        // Add "back" steps for nodes beyond the common ancestor
+        for (size_t k = prev_camino.size(); k > j; --k) {
+            if (prev_camino[k - 1] != "left" && prev_camino[k - 1] != "right") {
+                recorrido.push_back("back");
+            }
+        }
+
+        // Add the divergent part of the current path
+        for (size_t k = j; k < curr_camino.size(); ++k) {
+            recorrido.push_back(curr_camino[k]);
+        }
+    }
+
+    return recorrido;
+}
+
+// Function to build the minimal subtree containing all the items
 BinTree<std::string> Cjt_clientes::construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos) {
     if (arbol.empty()) return BinTree<std::string>();
 
@@ -155,7 +188,7 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     int id = contador;
     Cliente nuevoCliente(id);
 
-    // Leer los items que el cliente desea
+    // Read the items desired by the client
     std::vector<std::string> items;
     std::string item;
     while (std::cin >> item && item != "#") {
@@ -163,49 +196,53 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     }
     nuevoCliente.guardar_items(items);
 
-    // Encontrar todos los caminos a los items
-    std::vector<std::string> camino_actual;
-    std::vector<std::vector<std::string>> caminos_resultantes;
-    encontrar_todos_los_caminos(bintree_salas, items, camino_actual, caminos_resultantes);
-
-    // Combinar los caminos en un solo recorrido
-    std::vector<std::string> recorrido = combinar_caminos(caminos_resultantes);
-
-    // Construir el conjunto de nodos incluidos
+    // Find paths for each item
+    std::vector<std::vector<std::string>> caminos; // Paths to items in order
     std::set<std::string> nodos_incluidos;
-    for (const auto& camino : caminos_resultantes) {
-        for (const auto& paso : camino) {
-            if (paso != "left" && paso != "right" && paso != "back") {
-                nodos_incluidos.insert(paso);
+
+    for (const std::string& item : items) {
+        std::vector<std::string> camino;
+        if (encontrar_camino(bintree_salas, item, camino)) {
+            caminos.push_back(camino);
+            // Collect nodes to include in the minimal subtree
+            for (const auto& paso : camino) {
+                if (paso != "left" && paso != "right") {
+                    nodos_incluidos.insert(paso);
+                }
             }
+        } else {
+            std::cout << "Item " << item << " no encontrado en la tienda.\n";
         }
     }
 
-    // Construir el subárbol mínimo
+    // Combine the paths into a single traversal
+    std::vector<std::string> recorrido = combinar_caminos_en_orden(caminos);
+
+    // Build the minimal subtree
     BinTree<std::string> subarbol = construir_subarbol_minimo(bintree_salas, nodos_incluidos);
 
-    // Mostrar el subárbol
+    // Display the subtree
     std::cout << "Subárbol del cliente " << id << ":\n";
     subarbol.setOutputFormat(BT::VISUALFORMAT);
     std::cout << subarbol << std::endl;
 
-    // Mostrar el recorrido
+    // Display the traversal
     std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
     for (const std::string& paso : recorrido) {
-        if (paso != "left" && paso != "right") {
-            if (paso == "back") {
-                std::cout << "back" << std::endl;
-            } else {
-                nuevoCliente.pb_sala(paso);
-                std::cout << paso << std::endl;
-            }
+        if (paso == "back") {
+            std::cout << "back" << std::endl;
+        } else if (paso == "left" || paso == "right") {
+            std::cout << paso << std::endl;
+        } else {
+            nuevoCliente.pb_sala(paso);
+            std::cout << paso << std::endl;
         }
     }
 
-    // Agregar el cliente al vector
+    // Add the client to the vector
     clientes.push_back(nuevoCliente);
 
-    // Incrementar el contador
+    // Increment the counter
     incrementar_contador();
 }
 
@@ -224,4 +261,36 @@ Cliente& Cjt_clientes::obtener_cliente(int id) {
     } else {
         throw std::out_of_range("Cliente no encontrado");
     }
+}
+
+// Function to find the path to a single item
+bool Cjt_clientes::encontrar_camino(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino) {
+    if (arbol.empty()) return false;
+
+    camino.push_back(arbol.value()); // Add current node
+
+    if (arbol.value() == item) {
+        return true;
+    }
+
+    // Search left subtree
+    if (!arbol.left().empty()) {
+        camino.push_back("left");
+        if (encontrar_camino(arbol.left(), item, camino)) {
+            return true;
+        }
+        camino.pop_back(); // Remove "left"
+    }
+
+    // Search right subtree
+    if (!arbol.right().empty()) {
+        camino.push_back("right");
+        if (encontrar_camino(arbol.right(), item, camino)) {
+            return true;
+        }
+        camino.pop_back(); // Remove "right"
+    }
+
+    camino.pop_back(); // Remove current node
+    return false;
 }

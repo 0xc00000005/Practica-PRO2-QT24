@@ -14,6 +14,7 @@ public:
     Cliente(int id, Cjt_clientes* cjt_clientes);
 
     // Methods
+    int obtenerId() const;
     void guardar_producto(const std::string& producto, int cantidad);
     int numero_productos() const;
     void aumentar_productos_no_deseados();

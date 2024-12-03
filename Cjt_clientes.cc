@@ -269,7 +269,6 @@ void Cjt_clientes::agregar_cliente_con_productos_no_deseados(int id) {
 
 // Function to print clients with unwanted products
 void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
-    std::cout << "Clientes con productos no deseados: ";
     for (int id : clientes_con_productos_no_deseados) {
         std::cout << id << " ";
     }

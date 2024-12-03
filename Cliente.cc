@@ -2,12 +2,12 @@
 #include "Cjt_clientes.hh"
 
 // Constructor por defecto
-Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr {}
+Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr) {}
 
 // Constructor con parámetros
 Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), productos_no_deseados(0), cjt_clientes(cjt_clientes) {}
 
-int Cliente::productos_no_deseados = 0;
+//int Cliente::productos_no_deseados = 0;
 
 // Obtener el ID del cliente
 int Cliente::obtenerId() const {

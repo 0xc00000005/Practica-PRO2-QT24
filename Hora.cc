@@ -26,7 +26,7 @@ bool Hora::menor(Hora h) const
 	return horas < h.horas or (horas == h.horas and minutos < h.minutos) or (horas == h.horas and minutos == h.minutos and segundos < h.segundos);
 }
 
-bool Hora::igual(Hora h)
+bool Hora::igual(Hora h) const
 {
 	return horas == h.horas and minutos == h.minutos and segundos == h.segundos;
 }

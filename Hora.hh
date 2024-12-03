@@ -21,7 +21,7 @@ public:
 
 	bool menor(Hora h) const;
 
-	bool igual(Hora h);
+	bool igual(Hora h) const;
 
 	void sumar_segundos(int seg);
 

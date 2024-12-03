@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
-using namespace std;
 typedef BinTree<string> BT;
 
 // Constructor
@@ -14,7 +13,7 @@ Tienda::Tienda() {
 void Tienda::leer_salas() {
     bintree_salas = leer_salas_private();
     bintree_salas.setOutputFormat(BT::VISUALFORMAT);
-    cout << "Organizacion de las salas:\n" << bintree_salas << endl;
+    std::cout << "Organizacion de las salas:\n" << bintree_salas << std::endl;
 }
 
 BinTree<std::string> Tienda::recuperar_arbol(){
@@ -31,6 +30,6 @@ BinTree<std::string> Tienda::recuperar_arbol(){
 BT Tienda::leer_salas_private() {
     BinTree<string> t;
     t.setInputOutputFormat(BT::VISUALFORMAT);
-    cin >> t;
+    std::cin >> t;
     return t;
 }

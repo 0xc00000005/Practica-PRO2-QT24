@@ -202,7 +202,7 @@ BinTree<std::string> Cjt_clientes::construir_subarbol_minimo(const BinTree<std::
 // Función actualizada nuevo_cliente
 void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     int id = contador;
-    Cliente nuevoCliente(id);
+    Cliente nuevoCliente(id, this); // Pass 'this' pointer to Cliente
 
     // Read the items desired by the client
     std::vector<std::string> items;
@@ -260,6 +260,20 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
 
     // Increment the counter
     incrementar_contador();
+}
+
+// Function to update the set of clients with unwanted products
+void Cjt_clientes::agregar_cliente_con_productos_no_deseados(int id) {
+    clientes_con_productos_no_deseados.insert(id);
+}
+
+// Function to print clients with unwanted products
+void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
+    std::cout << "Clientes con productos no deseados: ";
+    for (int id : clientes_con_productos_no_deseados) {
+        std::cout << id << " ";
+    }
+    std::cout << std::endl;
 }
 
 // Recuperar un cliente por su ID (devuelve una referencia constante)

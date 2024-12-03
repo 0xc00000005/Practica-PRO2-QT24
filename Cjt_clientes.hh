@@ -23,6 +23,12 @@ public:
     // Method to get a modifiable reference to a client
     Cliente& obtener_cliente(int id);
 
+    // Function to update the set of clients with unwanted products
+    void agregar_cliente_con_productos_no_deseados(int id);
+
+    // Function to print clients with unwanted products
+    void imprimir_clientes_con_productos_no_deseados() const;
+
 private:
     // Contador estático para generar IDs
     static int contador;
@@ -48,6 +54,9 @@ private:
 
     // Function to build the minimal subtree containing all desired items
     BinTree<std::string> construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos);
+
+    // Set of client IDs with unwanted products
+    std::set<int> clientes_con_productos_no_deseados;
 };
 
 #endif // CJT_CLIENTES_HH

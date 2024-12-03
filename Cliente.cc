@@ -1,10 +1,11 @@
 #include "Cliente.hh"
+#include "Cjt_clientes.hh"
 
 // Constructor por defecto
-Cliente::Cliente() : id(0) {}
+Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr {}
 
 // Constructor con parámetros
-Cliente::Cliente(int id) : id(id) {}
+Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), productos_no_deseados(0), cjt_clientes(cjt_clientes) {}
 
 int Cliente::productos_no_deseados = 0;
 
@@ -44,6 +45,10 @@ void Cliente::guardar_producto(const std::string& producto, int cantidad) {
     if (salas_depuradas.find(producto) == salas_depuradas.end()) {
         // Product not found in 'salas_depuradas', increase 'productos_no_deseados'
         productos_no_deseados += cantidad;
+        // Notify Cjt_clientes
+        if (cjt_clientes) {
+            cjt_clientes->agregar_cliente_con_productos_no_deseados(id);
+        }
     }
 
     // Save the product and its quantity

@@ -50,6 +50,7 @@ int main() {
         } else if (instruccion == "fin") {
             break;
         }
+        cout << endl;
         cin >> instruccion;
     }
     return 0;

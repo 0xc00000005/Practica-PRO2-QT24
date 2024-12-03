@@ -71,7 +71,7 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     // Escribe detalles operación
     std::cout << id_cliente << " ";
     hora_actual.escribir_hora();
-
+    std::cout << endl;
     // Se recoge cliente actual
     Cliente& cliente = clientes.obtener_cliente(id_cliente);
 
@@ -100,6 +100,7 @@ void Cjt_cajas::escribir_caja_singular(int id_caja) {
     Hora hora;
     hora.leer_hora();
     hora.escribir_hora();
+    std::cout << std::endl;
     cajas[id_caja-1].escribir_caja(hora);
 }
 
@@ -107,6 +108,7 @@ void Cjt_cajas::escribir_cajas_plural() {
     Hora hora;
     hora.leer_hora();
     hora.escribir_hora();
+    std::cout << std::endl;
     for (int i = 0; i < num_cajas; ++i) {
         std::cout << "Caja " << i + 1 << ": ";
         cajas[i].escribir_caja(hora);

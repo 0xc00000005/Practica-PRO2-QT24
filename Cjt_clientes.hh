@@ -1,10 +1,11 @@
 #ifndef CJT_CLIENTES_HH
 #define CJT_CLIENTES_HH
 
-#include <string>
 #include <vector>
-#include "Cliente.hh"
+#include <string>
+#include <set>
 #include "BinTree.hh"
+#include "Cliente.hh"
 
 class Cjt_clientes {
 public:
@@ -35,6 +36,15 @@ private:
     // Funciones auxiliares
     bool encontrar_subarbol(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino);
     BinTree<std::string> construir_subarbol(const std::vector<std::string>& camino);
+
+    // Function to find all paths to the desired items
+    void encontrar_todos_los_caminos(const BinTree<std::string>& arbol, const std::vector<std::string>& items, std::vector<std::string>& camino_actual, std::vector<std::vector<std::string>>& caminos_resultantes);
+
+    // Function to combine multiple paths into a single traversal with 'back' instructions
+    std::vector<std::string> combinar_caminos(const std::vector<std::vector<std::string>>& caminos);
+
+    // Function to build the minimal subtree containing all desired items
+    BinTree<std::string> construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos);
 };
 
 #endif // CJT_CLIENTES_HH

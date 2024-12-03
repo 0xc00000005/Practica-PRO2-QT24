@@ -77,7 +77,7 @@ void Caja::escribir_caja(const Hora& hora) {
         const std::pair<Cliente, Hora>& cliente_con_salida = temp_queue.front();
 
         // Check if the client is still in the queue at the given time
-        if (hora.menor(cliente_con_salida.second) or hora.igual(cliente_con_salida.second) {
+        if (hora.menor(cliente_con_salida.second) or hora.igual(cliente_con_salida.second)) {
             // Output client ID
             std::cout << cliente_con_salida.first.obtenerId() << " ";
             // Output client's departure time

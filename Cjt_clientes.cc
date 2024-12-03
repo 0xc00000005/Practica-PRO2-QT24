@@ -136,7 +136,7 @@ std::vector<std::string> Cjt_clientes::combinar_caminos(const std::vector<std::v
     return recorrido;
 }
 
-// Function to combine paths into a single traversal
+// Function to combine paths into a single traversal, including 'back' steps to return to root
 std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vector<std::vector<std::string>>& caminos) {
     std::vector<std::string> recorrido;
     if (caminos.empty()) return recorrido;
@@ -153,7 +153,7 @@ std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vect
             ++j;
         }
 
-        // Add "back" steps for nodes beyond the common ancestor
+        // Add "back" steps for nodes beyond the common ancestor in the previous path
         for (size_t k = prev_camino.size(); k > j; --k) {
             if (prev_camino[k - 1] != "left" && prev_camino[k - 1] != "right") {
                 recorrido.push_back("back");
@@ -164,6 +164,22 @@ std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vect
         for (size_t k = j; k < curr_camino.size(); ++k) {
             recorrido.push_back(curr_camino[k]);
         }
+    }
+
+    // **Add 'back' steps to return to the root after visiting the last item**
+    // Calculate the current depth
+    size_t depth = 0;
+    for (const std::string& step : recorrido) {
+        if (step == "back") {
+            if (depth > 0) --depth;
+        } else if (step != "left" && step != "right") {
+            ++depth;
+        }
+    }
+
+    // Add 'back' steps to return to the root (subtract 1 because root doesn't require 'back')
+    for (size_t i = 0; i < depth - 1; ++i) {
+        recorrido.push_back("back");
     }
 
     return recorrido;

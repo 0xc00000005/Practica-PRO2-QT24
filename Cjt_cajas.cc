@@ -83,7 +83,6 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
         std::cin >> cantidad;
         cliente.guardar_producto(producto, cantidad);
     }
-
     // Asignar caja al cliente
     // Tiene punta que ahí está el fallo
     int id_caja = asignar_caja(cliente, hora_actual);

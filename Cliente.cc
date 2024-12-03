@@ -6,6 +6,8 @@ Cliente::Cliente() : id(0) {}
 // Constructor con parámetros
 Cliente::Cliente(int id) : id(id) {}
 
+int Cliente::productos_no_deseados = 0;
+
 // Obtener el ID del cliente
 int Cliente::obtenerId() const {
     return id;
@@ -38,6 +40,13 @@ void Cliente::salas_a_visitar() const {
 }
 
 void Cliente::guardar_producto(const std::string& producto, int cantidad) {
+    // Check if the product exists in 'salas_depuradas'
+    if (salas_depuradas.find(producto) == salas_depuradas.end()) {
+        // Product not found in 'salas_depuradas', increase 'productos_no_deseados'
+        productos_no_deseados += cantidad;
+    }
+
+    // Save the product and its quantity
     productos.push_back({producto, cantidad});
 }
 
@@ -47,4 +56,16 @@ int Cliente::numero_productos() const {
         total += p.second;
     }
     return total;
+}
+
+void Cliente::aumentar_productos_no_deseados(){
+    ++productos_no_deseados;
+}
+
+bool Cliente::check_productos_no_deseados() const {
+    return productos_no_deseados > 0;
+}
+
+int Cliente::imprimir_productos_no_deseados() const {
+    return productos_no_deseados;
 }

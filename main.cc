@@ -44,9 +44,13 @@ int main() {
             cout << "#escribir_cajas ";
             cjtcajas.escribir_cajas_plural();
         } else if (instruccion == "compra_y_no_quiere") {
-            // Function call for compra_y_no_quiere
+            int id;
+            cin >> id;
+            cout << "#compra_y_no_quiere " << id << endl;
+            const Cliente& cliente = cjtclientes.obtener_cliente(id);
+            cout << cliente.imprimir_productos_no_deseados() << endl;
         } else if (instruccion == "compran_y_no_quieren") {
-            // Function call for compran_y_no_quieren
+            
         } else if (instruccion == "fin") {
             break;
         }

@@ -8,6 +8,7 @@ Cjt_cajas::Cjt_cajas() : num_cajas(0) {}
 void Cjt_cajas::establecer_num_cajas(int n) {
     num_cajas = n;
     cajas.resize(num_cajas);
+    std::cout << "Hay " << num_cajas << " cajas" << std::endl;
 }
 
 // Asignar caja a un cliente

@@ -32,8 +32,9 @@ void Cliente::pb_sala(const std::string& sala){
 
 void Cliente::salas_a_visitar() const {
     for(const auto& nombre : salas_depuradas){
-        std::cout << nombre << std::endl;
+        std::cout << nombre << " ";
     }
+    std::cout << std::endl;
 }
 
 void Cliente::guardar_producto(const std::string& producto, int cantidad) {

@@ -13,6 +13,8 @@ Tienda::Tienda() {
 
 void Tienda::leer_salas() {
     bintree_salas = leer_salas_private();
+    bintree_salas.setOutputFormat(BT::VISUALFORMAT);
+    cout << "Organizacion de las salas:\n" << bintree_salas << endl;
 }
 
 BinTree<std::string> Tienda::recuperar_arbol(){

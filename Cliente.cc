@@ -25,8 +25,8 @@ void Cliente::desea() const {
     std::cout << std::endl;
 }
 
-void Cliente::guardar_items(const std::vector<std::string>& itemscin){
-    items=itemscin;
+void Cliente::guardar_items(const std::string& itemscin){
+    items.insert(itemscin);
 }
 
 void Cliente::guardar_items_comprados(const std::vector<std::string>& itcmcin){

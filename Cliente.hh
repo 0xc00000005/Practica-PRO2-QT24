@@ -21,7 +21,7 @@ public:
     bool check_productos_no_deseados() const;
     int imprimir_productos_no_deseados() const;
     void pb_sala(const std::string& sala);
-    void guardar_items(const std::vector<std::string>& itemscin);
+    void guardar_items(const std::string& itemscin);
     void guardar_items_comprados(const std::vector<std::string>& itcmcin);
     void desea() const;
     void salas_a_visitar() const;
@@ -30,7 +30,7 @@ private:
     int id;
     int productos_no_deseados;
     std::vector<std::pair<std::string, int>> productos;
-    std::vector<std::string> items;
+    std::set<std::string> items;
     std::vector<std::string> items_comprados;
     std::set<std::string> salas_depuradas;
     Cjt_clientes* cjt_clientes; // Pointer to Cjt_clientes

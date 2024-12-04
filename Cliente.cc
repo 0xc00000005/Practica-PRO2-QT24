@@ -25,7 +25,7 @@ void Cliente::desea() const {
     std::cout << std::endl;
 }
 
-void Cliente::guardar_items(const std::vector<std::string>& itemscin){
+void Cliente::guardar_items(const std::set<std::string>& itemscin){
     items=itemscin;
 }
 

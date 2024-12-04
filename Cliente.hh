@@ -25,10 +25,12 @@ public:
     void guardar_items_comprados(const std::vector<std::string>& itcmcin);
     void desea() const;
     void salas_a_visitar() const;
+    void aumentar_num_productos(int num);
 
 private:
     int id;
     int productos_no_deseados;
+    int num_productos;
     std::vector<std::pair<std::string, int>> productos;
     std::set<std::string> items;
     std::vector<std::string> items_comprados;

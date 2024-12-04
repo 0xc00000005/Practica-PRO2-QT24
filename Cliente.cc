@@ -3,10 +3,10 @@
 #include <algorithm>
 
 // Constructor por defecto
-Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr) {}
+Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr), num_productos(0) {}
 
 // Constructor con parámetros
-Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), productos_no_deseados(0), cjt_clientes(cjt_clientes) {}
+Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), productos_no_deseados(0), cjt_clientes(cjt_clientes), num_productos(0) {}
 
 //int Cliente::productos_no_deseados = 0;
 
@@ -60,14 +60,20 @@ void Cliente::guardar_producto(const std::string& producto, int cantidad) {
 
     // Save the product and its quantity
     productos.push_back({producto, cantidad});
+    aumentar_num_productos(cantidad);
 }
 
 int Cliente::numero_productos() const {
-    int total = 0;
+    /*int total = 0;
     for (const auto& p : productos) {
         total += p.second;
     }
-    return total;
+    return total;*/
+    return num_productos;
+}
+
+void Cliente::aumentar_num_productos(int num){
+    num_productos += num;
 }
 
 void Cliente::aumentar_productos_no_deseados(){

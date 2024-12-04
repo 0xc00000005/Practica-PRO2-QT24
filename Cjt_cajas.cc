@@ -21,13 +21,6 @@ int Cjt_cajas::asignar_caja(const Cliente& cliente, const Hora& hora_actual) {
     return id_caja;
 }
 
-/* Calcular hora de salida
-Hora Cjt_cajas::calcular_hora_salida(const Hora& hora_actual, int id_caja) {
-    return cajas[id_caja].calcular_salida(hora_actual);
-}*/
-
-
-
 // Buscar la mejor caja disponible
 int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
     int mejor_caja = -1;

@@ -16,10 +16,13 @@ int Cliente::obtenerId() const {
 }
 
 void Cliente::desea() const {
-    for(const auto& nombre : items){
-        // Parece que el problema está en que no accede a nombre
-        std::cout << nombre << std::endl;
+    for(auto it = items.begin(); it != items.end(); ++it){
+        std::cout << *it;
+        if(std::next(it) != items.end()){
+            std::cout << " ";
+        }
     }
+    std::cout << std::endl;
 }
 
 void Cliente::guardar_items(const std::vector<std::string>& itemscin){
@@ -35,8 +38,11 @@ void Cliente::pb_sala(const std::string& sala){
 }
 
 void Cliente::salas_a_visitar() const {
-    for(const auto& nombre : salas_depuradas){
-        std::cout << nombre << " ";
+    for(auto it = salas_depuradas.begin(); it != salas_depuradas.end(); ++it){
+        std::cout << *it;
+        if(std::next(it) != salas_depuradas.end()){
+            std::cout << " ";
+        }
     }
     std::cout << std::endl;
 }

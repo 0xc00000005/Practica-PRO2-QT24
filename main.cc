@@ -50,7 +50,7 @@ int main() {
             const Cliente& cliente = cjtclientes.obtener_cliente(id);
             cout << cliente.imprimir_productos_no_deseados() << endl;
         } else if (instruccion == "compran_y_no_quieren") {
-            cout << "#compran_y_no_quieren " << endl;
+            cout << "#compran_y_no_quieren" << endl;
             cjtclientes.imprimir_clientes_con_productos_no_deseados();
         }
         cout << endl;

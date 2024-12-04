@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <set>
 #include <algorithm>
+#include <iterator>
 
 using namespace std;
 
@@ -269,8 +270,11 @@ void Cjt_clientes::agregar_cliente_con_productos_no_deseados(int id) {
 
 // Function to print clients with unwanted products
 void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
-    for (int id : clientes_con_productos_no_deseados) {
-        std::cout << id << " ";
+    for(auto it = clientes_con_productos_no_deseados.begin(); it != clientes_con_productos_no_deseados.end(); ++it){
+        std::cout << *it;
+        if(std::next(it) != clientes_con_productos_no_deseados.end()){
+            std::cout << " ";
+        }
     }
     std::cout << std::endl;
 }

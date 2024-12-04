@@ -206,7 +206,7 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     Cliente nuevoCliente(id, this); // Pass 'this' pointer to Cliente
 
     // Read the items desired by the client
-    std::set<std::string> items;
+    std::vector<std::string> items;
     std::string item;
     while (std::cin >> item && item != "#") {
         items.push_back(item);

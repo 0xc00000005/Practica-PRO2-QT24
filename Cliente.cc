@@ -3,11 +3,10 @@
 #include <algorithm>
 
 // Constructor por defecto
-Cliente::Cliente() : id(0), productos_no_deseados(0), cjt_clientes(nullptr), num_productos(0) {}
+Cliente::Cliente() : id(0), num_productos(0), productos_no_deseados(0), cjt_clientes(nullptr) {}
 
 // Constructor con parámetros
-Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), productos_no_deseados(0), cjt_clientes(cjt_clientes), num_productos(0) {}
-
+Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), num_productos(0), productos_no_deseados(0), cjt_clientes(cjt_clientes) {}
 //int Cliente::productos_no_deseados = 0;
 
 // Obtener el ID del cliente

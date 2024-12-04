@@ -21,7 +21,7 @@ public:
     bool check_productos_no_deseados() const;
     int imprimir_productos_no_deseados() const;
     void pb_sala(const std::string& sala);
-    void guardar_items(const std::set<std::string>& itemscin);
+    void guardar_items(const std::string& itemscin);
     void guardar_items_comprados(const std::vector<std::string>& itcmcin);
     void desea() const;
     void salas_a_visitar() const;

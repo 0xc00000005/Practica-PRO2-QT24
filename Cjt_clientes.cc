@@ -209,9 +209,10 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     std::set<std::string> items;
     std::string item;
     while (std::cin >> item && item != "#") {
-        items.insert(item);
+        items.push_back(item);
+        nuevoCliente.guardar_items(item);
     }
-    nuevoCliente.guardar_items(items);
+    
 
     // Find paths for each item
     std::vector<std::vector<std::string>> caminos; // Paths to items in order

@@ -29,13 +29,14 @@ public:
 
 private:
     int id;
-    int productos_no_deseados;
     int num_productos;
+    int productos_no_deseados;
+    Cjt_clientes* cjt_clientes; // Pointer to Cjt_clientes
     std::vector<std::pair<std::string, int>> productos;
     std::set<std::string> items;
     std::vector<std::string> items_comprados;
     std::set<std::string> salas_depuradas;
-    Cjt_clientes* cjt_clientes; // Pointer to Cjt_clientes
+    
 };
 
 #endif // CLIENTE_HH

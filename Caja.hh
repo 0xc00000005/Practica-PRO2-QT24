@@ -27,7 +27,7 @@ public:
     int num_clientes_asignados() const;
 
     // Verificar si la caja está disponible en la hora actual
-    bool esta_disponible(const Hora& hora_actual) const;
+    //bool esta_disponible(const Hora& hora_actual) const;
 
     // Obtener el identificador de la caja
     int obtenerId() const;

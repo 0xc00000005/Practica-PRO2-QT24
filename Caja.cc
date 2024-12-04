@@ -42,11 +42,10 @@ Hora Caja::get_proximo_libre() const {
 int Caja::num_clientes_asignados() const {
     return cola_clientes.size();
 }
-
+/*
 bool Caja::esta_disponible(const Hora& hora_actual) const {
-    // Aquí puedes implementar lógica adicional si hay horarios de apertura/cierre
     return true;
-}
+}*/
 
 int Caja::obtenerId() const {
     return idCaja;

@@ -170,19 +170,23 @@ void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
 
 // Recuperar un cliente por su ID (devuelve una referencia constante)
 const Cliente& Cjt_clientes::obtener_cliente(int id) const {
-    if (id - 1 >= 0 && id - 1 < clientes.size()) {
-        return clientes[id - 1];
-    } else {
-        throw std::out_of_range("Cliente no encontrado");
+    if (id >= 1) {
+        size_t index = static_cast<size_t>(id - 1);
+        if (index < clientes.size()) {
+            return clientes[index];
+        }
     }
+    throw std::out_of_range("Cliente no encontrado");
 }
 
 Cliente& Cjt_clientes::obtener_cliente(int id) {
-    if (id - 1 >= 0 && id - 1 < clientes.size()) {
-        return clientes[id - 1];
-    } else {
-        throw std::out_of_range("Cliente no encontrado");
+    if (id >= 1) {
+        size_t index = static_cast<size_t>(id - 1);
+        if (index < clientes.size()) {
+            return clientes[index];
+        }
     }
+    throw std::out_of_range("Cliente no encontrado");
 }
 
 // Function to find the path to a single item

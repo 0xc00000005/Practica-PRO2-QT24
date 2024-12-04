@@ -7,7 +7,6 @@ Cliente::Cliente() : id(0), num_productos(0), productos_no_deseados(0), cjt_clie
 
 // Constructor con parámetros
 Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), num_productos(0), productos_no_deseados(0), cjt_clientes(cjt_clientes) {}
-//int Cliente::productos_no_deseados = 0;
 
 // Obtener el ID del cliente
 int Cliente::obtenerId() const {

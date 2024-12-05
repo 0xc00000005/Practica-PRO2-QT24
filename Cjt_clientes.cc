@@ -12,51 +12,54 @@ using namespace std;
 
 typedef BinTree<string> BT;
 
-// Inicialización del contador estático
+/// Inicialización del contador estático
 int Cjt_clientes::contador = 1;
 
-// Constructor
+
+/// @brief Constructor por defecto para inicializar un conjunto de clientes.
 Cjt_clientes::Cjt_clientes() {
     clientes = vector<Cliente>();
 }
 
-// Incrementar contador
+/// @brief Incrementa el contador estático para asignar IDs únicos a los clientes.
 void Cjt_clientes::incrementar_contador() {
     ++contador;
 }
 
-// Function to combine paths into a single traversal, including 'back' steps to return to root
+/// @brief Combina múltiples caminos hacia diferentes ítems en un único recorrido.
+/// @param caminos Vector de vectores que contiene caminos individuales hacia los ítems.
+/// @return Vector que representa el recorrido combinado.
 std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vector<std::vector<std::string>>& caminos) {
     std::vector<std::string> recorrido;
     if (caminos.empty()) return recorrido;
 
-    recorrido = caminos[0]; // Start with the path to the first item
+    recorrido = caminos[0]; /// Empieza por el primer item.
 
     for (size_t i = 1; i < caminos.size(); ++i) {
         const auto& prev_camino = caminos[i - 1];
         const auto& curr_camino = caminos[i];
 
-        // Find the common prefix length
+        /// Encuentra la longitud del camino común
         size_t j = 0;
         while (j < prev_camino.size() && j < curr_camino.size() && prev_camino[j] == curr_camino[j]) {
             ++j;
         }
 
-        // Add "back" steps for nodes beyond the common ancestor in the previous path
+        /// Agrega pasos "hacia atrás" para los nodos más allá de la rama "común"
         for (size_t k = prev_camino.size(); k > j; --k) {
             if (prev_camino[k - 1] != "left" && prev_camino[k - 1] != "right") {
                 recorrido.push_back("back");
             }
         }
 
-        // Add the divergent part of the current path
+        /// Añade los pasos restantes del camino actual
         for (size_t k = j; k < curr_camino.size(); ++k) {
             recorrido.push_back(curr_camino[k]);
         }
     }
 
-    // **Add 'back' steps to return to the root after visiting the last item**
-    // Calculate the current depth
+    /// Añade pasos "hacia atrás" para volver a la raíz
+    /// Calcula la profundidad del último ítem en el recorrido
     size_t depth = 0;
     for (const std::string& step : recorrido) {
         if (step == "back") {
@@ -66,7 +69,8 @@ std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vect
         }
     }
 
-    // Add 'back' steps to return to the root (subtract 1 because root doesn't require 'back')
+    /// Añade "back" para volver a la raíz.
+    /// Se usa -1 porque el último paso no es un "back".
     for (size_t i = 0; i < depth - 1; ++i) {
         recorrido.push_back("back");
     }
@@ -74,7 +78,10 @@ std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vect
     return recorrido;
 }
 
-// Function to build the minimal subtree containing all the items
+/// @brief Construye el subárbol mínimo que contiene un conjunto específico de nodos.
+/// @param arbol Árbol binario original.
+/// @param nodos_incluidos Conjunto de nodos que deben estar presentes en el subárbol.
+/// @return Subárbol que contiene solo los nodos necesarios.
 BinTree<std::string> Cjt_clientes::construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos) {
     if (arbol.empty()) return BinTree<std::string>();
 
@@ -88,12 +95,13 @@ BinTree<std::string> Cjt_clientes::construir_subarbol_minimo(const BinTree<std::
     }
 }
 
-// Función actualizada nuevo_cliente
+/// @brief Crea un nuevo cliente, calcula su recorrido por la tienda y construye su subárbol.
+/// @param bintree_salas Árbol binario que representa las salas de la tienda.
 void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     int id = contador;
     Cliente nuevoCliente(id, this); // Pass 'this' pointer to Cliente
 
-    // Read the items desired by the client
+    /// Lee los ítems que desea comprar el cliente
     std::vector<std::string> items;
     std::string item;
     while (std::cin >> item && item != "#") {
@@ -102,8 +110,8 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     }
     
 
-    // Find paths for each item
-    std::vector<std::vector<std::string>> caminos; // Paths to items in order
+    /// Encuentra el camino hacia cada ítem y construye el recorrido
+    std::vector<std::vector<std::string>> caminos; /// Vector donde se almacenan los caminos.
     std::set<std::string> nodos_incluidos;
 
     for (const std::string& item : items) {
@@ -121,18 +129,20 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
         }
     }
 
-    // Combine the paths into a single traversal
+    /// Combina los caminos en un solo recorrido ordenado
+    /// Esto se consigue llamando a combinar_caminos_en_orden().
     std::vector<std::string> recorrido = combinar_caminos_en_orden(caminos);
 
-    // Build the minimal subtree
+    /// Construye el subárbol mínimo que contiene todos los nodos necesarios
+    /// Esto se consigue llamando a construir_subarbol_minimo().
     BinTree<std::string> subarbol = construir_subarbol_minimo(bintree_salas, nodos_incluidos);
 
-    // Display the subtree
+    /// Imprime en consola el subárbol.
     std::cout << "Subarbol del cliente " << id << ":\n";
     subarbol.setOutputFormat(BT::VISUALFORMAT);
     std::cout << subarbol << std::endl;
 
-    // Display the traversal
+    /// Imprime en consola el recorrido del cliente.
     std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
     for (const std::string& paso : recorrido) {
         if (paso == "back") {
@@ -145,19 +155,21 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
         }
     }
 
-    // Add the client to the vector
+    /// Añade el cliente con todos sus datos al vector de clientes.
     clientes.push_back(nuevoCliente);
 
-    // Increment the counter
+    /// Incrementa el contador de ID.
+    // Se consigue llamando a incrementar_contador().
     incrementar_contador();
 }
 
-// Function to update the set of clients with unwanted products
+/// @brief Agrega el ID de un cliente a la lista de clientes con productos no deseados.
+/// @param id Identificador único del cliente.
 void Cjt_clientes::agregar_cliente_con_productos_no_deseados(int id) {
     clientes_con_productos_no_deseados.insert(id);
 }
 
-// Function to print clients with unwanted products
+/// @brief Imprime los IDs de los clientes que tienen productos no deseados.
 void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
     for(auto it = clientes_con_productos_no_deseados.begin(); it != clientes_con_productos_no_deseados.end(); ++it){
         std::cout << *it;
@@ -169,6 +181,10 @@ void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
 }
 
 // Recuperar un cliente por su ID (devuelve una referencia constante)
+/// @brief Recupera un cliente por su ID.
+/// @param id Identificador único del cliente.
+/// @return Referencia constante al cliente.
+/// @throw std::out_of_range Si el cliente no existe.
 const Cliente& Cjt_clientes::obtener_cliente(int id) const {
     if (id >= 1) {
         size_t index = static_cast<size_t>(id - 1);
@@ -179,6 +195,10 @@ const Cliente& Cjt_clientes::obtener_cliente(int id) const {
     throw std::out_of_range("Cliente no encontrado");
 }
 
+/// @brief Recupera un cliente por su ID (versión no constante).
+/// @param id Identificador único del cliente.
+/// @return Referencia al cliente.
+/// @throw std::out_of_range Si el cliente no existe.
 Cliente& Cjt_clientes::obtener_cliente(int id) {
     if (id >= 1) {
         size_t index = static_cast<size_t>(id - 1);
@@ -189,34 +209,38 @@ Cliente& Cjt_clientes::obtener_cliente(int id) {
     throw std::out_of_range("Cliente no encontrado");
 }
 
-// Function to find the path to a single item
+/// @brief Encuentra el camino hacia un ítem en el árbol binario.
+/// @param arbol Árbol binario donde buscar.
+/// @param item Ítem a buscar en el árbol.
+/// @param camino Vector donde se almacena el camino encontrado.
+/// @return true si se encuentra el ítem, false en caso contrario.
 bool Cjt_clientes::encontrar_camino(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino) {
     if (arbol.empty()) return false;
 
-    camino.push_back(arbol.value()); // Add current node
+    camino.push_back(arbol.value()); /// Añade nodo actual al vector.
 
     if (arbol.value() == item) {
         return true;
     }
 
-    // Search left subtree
+    /// Busca en el subárbol izquierdo.
     if (!arbol.left().empty()) {
         camino.push_back("left");
         if (encontrar_camino(arbol.left(), item, camino)) {
             return true;
         }
-        camino.pop_back(); // Remove "left"
+        camino.pop_back(); /// Elimina "left".
     }
 
-    // Search right subtree
+    /// Search right subtree
     if (!arbol.right().empty()) {
         camino.push_back("right");
         if (encontrar_camino(arbol.right(), item, camino)) {
             return true;
         }
-        camino.pop_back(); // Remove "right"
+        camino.pop_back(); /// Elimina "right"
     }
 
-    camino.pop_back(); // Remove current node
+    camino.pop_back(); /// Elimina nodo actual.
     return false;
 }

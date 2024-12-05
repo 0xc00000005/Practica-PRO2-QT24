@@ -8,20 +8,20 @@
 
 class Tienda {
 public:
-    // Constructor
+    /// Constructor
     Tienda();
 
-    // Leer las salas y construir el árbol de la tienda
+    /// Leer las salas y construir el árbol de la tienda
     void leer_salas();
 
     BinTree<std::string> recuperar_arbol();
 
 private:
-    // Árbol binario que representa las salas de la tienda
+    /// Árbol binario que representa las salas de la tienda
     BinTree<std::string> bintree_salas;
 
-    // Funciones auxiliares
+    /// Funciones auxiliares
     BinTree<std::string> leer_salas_private();
 };
 
-#endif // TIENDA_HH
+#endif /// TIENDA_HH

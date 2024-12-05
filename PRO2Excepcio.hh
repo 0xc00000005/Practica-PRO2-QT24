@@ -1,4 +1,4 @@
-#ifndef PRO2_EXCEPCIO  // per evitar fer mes d'un include d'aquest fitxer
+#ifndef PRO2_EXCEPCIO  /// per evitar fer mes d'un include d'aquest fitxer
 #define PRO2_EXCEPCIO
 
 #include <exception>

@@ -2,13 +2,13 @@
 #include "Cjt_clientes.hh"
 #include <algorithm>
 
-// Constructor por defecto
+/// Constructor por defecto
 Cliente::Cliente() : id(0), num_productos(0), productos_no_deseados(0), cjt_clientes(nullptr) {}
 
-// Constructor con parámetros
+/// Constructor con parámetros
 Cliente::Cliente(int id, Cjt_clientes* cjt_clientes) : id(id), num_productos(0), productos_no_deseados(0), cjt_clientes(cjt_clientes) {}
 
-// Obtener el ID del cliente
+/// Obtener el ID del cliente
 int Cliente::obtenerId() const {
     return id;
 }
@@ -46,17 +46,17 @@ void Cliente::salas_a_visitar() const {
 }
 
 void Cliente::guardar_producto(const std::string& producto, int cantidad) {
-    // Check if the product exists in 'salas_depuradas'
+    /// Check if the product exists in 'salas_depuradas'
     if (std::find(items.begin(), items.end(), producto) == items.end()) {
-        // Product not found in 'salas_depuradas', increase 'productos_no_deseados'
+        /// Product not found in 'salas_depuradas', increase 'productos_no_deseados'
         productos_no_deseados += cantidad;
-        // Notify Cjt_clientes
+        /// Notify Cjt_clientes
         if (cjt_clientes) {
             cjt_clientes->agregar_cliente_con_productos_no_deseados(id);
         }
     }
 
-    // Save the product and its quantity
+    /// Save the product and its quantity
     productos.push_back({producto, cantidad});
     aumentar_num_productos(cantidad);
 }

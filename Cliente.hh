@@ -5,15 +5,15 @@
 #include <vector>
 #include <set>
 
-class Cjt_clientes; // Forward declaration
+class Cjt_clientes; /// Forward declaration
 
 class Cliente {
 public:
-    // Constructors
+    /// Constructors
     Cliente();
     Cliente(int id, Cjt_clientes* cjt_clientes);
 
-    // Methods
+    /// Methods
     int obtenerId() const;
     void guardar_producto(const std::string& producto, int cantidad);
     int numero_productos() const;
@@ -31,7 +31,7 @@ private:
     int id;
     int num_productos;
     int productos_no_deseados;
-    Cjt_clientes* cjt_clientes; // Pointer to Cjt_clientes
+    Cjt_clientes* cjt_clientes; /// Pointer to Cjt_clientes
     std::vector<std::pair<std::string, int>> productos;
     std::set<std::string> items;
     std::vector<std::string> items_comprados;
@@ -39,4 +39,4 @@ private:
     
 };
 
-#endif // CLIENTE_HH
+#endif /// CLIENTE_HH

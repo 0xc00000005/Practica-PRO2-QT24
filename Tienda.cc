@@ -5,7 +5,7 @@
 #include <stdexcept>
 typedef BinTree<string> BT;
 
-// Constructor
+/// Constructor
 Tienda::Tienda() {
     bintree_salas = BT();
 }

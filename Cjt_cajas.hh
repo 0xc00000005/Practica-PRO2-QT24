@@ -10,18 +10,18 @@
 
 class Cjt_cajas {
 public:
-    // Constructor
+    /// Constructor
     Cjt_cajas();
 
     void establecer_num_cajas(int n);
 
     int asignar_caja(const Cliente& cliente, const Hora& hora_actual);
 
-    //Hora calcular_hora_salida(const Hora& hora_actual, int id_caja);
+    ///Hora calcular_hora_salida(const Hora& hora_actual, int id_caja);
 
     void expedir_ticket(const Cliente& cliente) const;
 
-    // Updated function declaration
+    /// Updated function declaration
     void expedir_ticket(Cjt_clientes& clientes);
 
     void escribir_caja_singular(int id_caja);

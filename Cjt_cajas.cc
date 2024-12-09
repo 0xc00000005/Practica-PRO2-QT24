@@ -128,7 +128,7 @@ void Cjt_cajas::expedir_ticket(Cjt_clientes& clientes) {
     /// Imprimir ticket
     std::cout << "Cliente " << id_cliente << " compra " << cliente.numero_productos() << " items" << std::endl;
     std::cout << "Cliente " << id_cliente << " va a caja " << (id_caja + 1);
-    std::cout << " y saldrá a las ";
+    std::cout << " y saldra a las ";
     hora_salida.escribir_hora();
     std::cout << std::endl;
 }

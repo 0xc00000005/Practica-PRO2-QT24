@@ -125,7 +125,8 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
                 }
             }
         } else {
-            std::cout << "Item " << item << " no encontrado en la tienda.\n";
+            std::cout << "Item " << item << " no encontrado en la tienda.";
+            std::cout << std::endl;
         }
     }
 
@@ -138,12 +139,14 @@ void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
     BinTree<std::string> subarbol = construir_subarbol_minimo(bintree_salas, nodos_incluidos);
 
     //// Imprime en consola el subárbol.
-    std::cout << "Subarbol del cliente " << id << ":\n";
+    std::cout << "Subarbol del cliente " << id << ":";
+    std::cout << std::endl;
     subarbol.setOutputFormat(BT::VISUALFORMAT);
     std::cout << subarbol << std::endl;
 
     //// Imprime en consola el recorrido del cliente.
-    std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
+    std::cout << "Recorrido por la tienda del cliente " << id << ":";
+    std::cout << std::endl;
     for (const std::string& paso : recorrido) {
         if (paso == "back") {
             std::cout << "back" << std::endl;

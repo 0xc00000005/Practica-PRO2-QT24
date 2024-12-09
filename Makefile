@@ -6,7 +6,7 @@ CXX = g++
 CXXFLAGS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11 -fno-extended-identifiers
 
 # Archivos fuente y objetos
-SRCS = main.cc Tienda.cc Cliente.cc Cjt_clientes.cc Hora.cc Cjt_cajas.cc Caja.cc
+SRCS = program.cc Tienda.cc Cliente.cc Cjt_clientes.cc Hora.cc Cjt_cajas.cc Caja.cc
 OBJS = $(SRCS:.cc=.o)
 
 # Archivos de encabezado

@@ -1,9 +1,9 @@
 # Nombre del ejecutable
-TARGET = a.out
+TARGET = program.exe
 
 # Compilador y opciones de compilación
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++11
+CXXFLAGS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11 -fno-extended-identifiers
 
 # Archivos fuente y objetos
 SRCS = main.cc Tienda.cc Cliente.cc Cjt_clientes.cc Hora.cc Cjt_cajas.cc Caja.cc

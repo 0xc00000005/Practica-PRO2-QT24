@@ -33,46 +33,35 @@ std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vect
     std::vector<std::string> recorrido;
     if (caminos.empty()) return recorrido;
 
-    recorrido = caminos[0]; //// Empieza por el primer item.
+    // Start with the path to the first item
+    recorrido = caminos[0];
 
+    // For each subsequent path
     for (size_t i = 1; i < caminos.size(); ++i) {
         const auto& prev_camino = caminos[i - 1];
         const auto& curr_camino = caminos[i];
 
-        //// Encuentra la longitud del camino común
+        // Find the point where paths diverge
         size_t j = 0;
         while (j < prev_camino.size() && j < curr_camino.size() && prev_camino[j] == curr_camino[j]) {
             ++j;
         }
 
-        //// Agrega pasos "hacia atrás" para los nodos más allá de la rama "común"
-        for (size_t k = prev_camino.size(); k > j; --k) {
-            if (prev_camino[k - 1] != "left" && prev_camino[k - 1] != "right") {
-                recorrido.push_back("back");
+        // Steps to backtrack from the end of prev_camino to the common ancestor
+        std::vector<std::string> backtrackSteps;
+        for (size_t k = prev_camino.size() - 1; k >= j; --k) {
+            if (prev_camino[k] != "left" && prev_camino[k] != "right") {
+                backtrackSteps.push_back("back");
             }
+            if (k == j) break;  // Prevent size_t underflow
         }
 
-        //// Añade los pasos restantes del camino actual
-        for (size_t k = j; k < curr_camino.size(); ++k) {
-            recorrido.push_back(curr_camino[k]);
-        }
-    }
+        // Steps to move from the common ancestor to the next item
+        std::vector<std::string> forwardSteps(curr_camino.begin() + j, curr_camino.end());
 
-    //// Añade pasos "hacia atrás" para volver a la raíz
-    //// Calcula la profundidad del último ítem en el recorrido
-    size_t depth = 0;
-    for (const std::string& step : recorrido) {
-        if (step == "back") {
-            if (depth > 0) --depth;
-        } else if (step != "left" && step != "right") {
-            ++depth;
-        }
-    }
-
-    //// Añade "back" para volver a la raíz.
-    //// Se usa -1 porque el último paso no es un "back".
-    for (size_t i = 0; i < depth - 1; ++i) {
-        recorrido.push_back("back");
+        // Append backtrack and forward steps to recorrido
+        recorrido.insert(recorrido.end(), backtrackSteps.begin(), backtrackSteps.end());
+        recorrido.insert(recorrido.end(), forwardSteps.begin(), forwardSteps.end());
     }
 
     return recorrido;

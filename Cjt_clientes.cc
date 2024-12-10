@@ -29,6 +29,7 @@ void Cjt_clientes::incrementar_contador() {
 //// @brief Combina múltiples caminos hacia diferentes ítems en un único recorrido.
 //// @param caminos Vector de vectores que contiene caminos individuales hacia los ítems.
 //// @return Vector que representa el recorrido combinado.
+// Updated 'combinar_caminos_en_orden' function to include returning to the root at the end
 std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vector<std::vector<std::string>>& caminos) {
     std::vector<std::string> recorrido;
     if (caminos.empty()) return recorrido;
@@ -47,21 +48,27 @@ std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vect
             ++j;
         }
 
-        // Steps to backtrack from the end of prev_camino to the common ancestor
-        std::vector<std::string> backtrackSteps;
-        for (size_t k = prev_camino.size() - 1; k >= j; --k) {
+        // Backtrack to the common ancestor
+        size_t k = prev_camino.size();
+        while (k > j) {
+            --k;
             if (prev_camino[k] != "left" && prev_camino[k] != "right") {
-                backtrackSteps.push_back("back");
+                recorrido.push_back("back");
             }
-            if (k == j) break;  // Prevent size_t underflow
         }
 
-        // Steps to move from the common ancestor to the next item
-        std::vector<std::string> forwardSteps(curr_camino.begin() + j, curr_camino.end());
+        // Move forward to the next item
+        recorrido.insert(recorrido.end(), curr_camino.begin() + j, curr_camino.end());
+    }
 
-        // Append backtrack and forward steps to recorrido
-        recorrido.insert(recorrido.end(), backtrackSteps.begin(), backtrackSteps.end());
-        recorrido.insert(recorrido.end(), forwardSteps.begin(), forwardSteps.end());
+    // Backtrack from the last item to the root
+    const auto& last_camino = caminos.back();
+    size_t k = last_camino.size();
+    while (k > 1) {
+        --k;
+        if (last_camino[k] != "left" && last_camino[k] != "right") {
+            recorrido.push_back("back");
+        }
     }
 
     return recorrido;

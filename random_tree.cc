@@ -67,13 +67,17 @@ int main() {
     cin >> equilibrado;
 
     srand(time(0)); // Seed the random number generator
-
-
-    if (equilibrado==0) BinTree<string> tree = construir_BinTree(palabras, depth);
-    if (equilibrado==1) BinTree<string> tree = construir_BinTree_desigual(palabras, depth);
-
-    
-
+    BinTree<string> tree;
+    if (equilibrado==0) tree = construir_BinTree(palabras, depth);
+    if (equilibrado==1) tree = construir_BinTree_desigual(palabras, depth);
     tree.setOutputFormat(BinTree<string>::VISUALFORMAT);
     cout << tree << endl;
+    auto now = chrono::system_clock::now();
+    time_t now_time = chrono::system_clock::to_time_t(now);
+    tm* local_time = localtime(&now_time);
+    char filename[100];
+    strftime(filename, sizeof(filename), "%H%M%S.cor", local_time);
+    ofstream output_file(filename);
+    output_file << tree << endl;
+    output_file.close();
 }

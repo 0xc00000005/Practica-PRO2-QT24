@@ -27,4 +27,8 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f *.o *.gch
 
-.PHONY: all clean cleanall
+# Regla para compilar prueba
+prueba: random_tree.cc
+	$(CXX) random_tree.cc -o random.out
+
+.PHONY: all clean cleanall prueba

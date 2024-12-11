@@ -221,18 +221,18 @@ alimentacion basquet futbol golf hipica piscina zapatos
 
 #pago_cliente 1 11:05:05
 Cliente 1 compra 8 items
-Cliente 1 va a caja 1 y saldrá a las 11:05:27
+Cliente 1 va a caja 1 y sale a las 11:05:27
 
 #escribir_caja 1 11:05:06
 1 11:05:27 
 
 #pago_cliente 2 11:05:07
 Cliente 2 compra 5 items
-Cliente 2 va a caja 2 y saldrá a las 11:05:26
+Cliente 2 va a caja 2 y sale a las 11:05:26
 
 #pago_cliente 3 11:05:09
 Cliente 3 compra 3 items
-Cliente 3 va a caja 3 y saldrá a las 11:05:26
+Cliente 3 va a caja 3 y sale a las 11:05:26
 
 #escribir_cajas 11:05:10
 Caja 1: 1 11:05:27 
@@ -268,7 +268,7 @@ back
 
 #pago_cliente 4 11:05:12
 Cliente 4 compra 4 items
-Cliente 4 va a caja 2 y saldrá a las 11:05:44
+Cliente 4 va a caja 2 y sale a las 11:05:44
 
 #escribir_cajas 11:05:13
 Caja 1: 1 11:05:27 
@@ -277,7 +277,7 @@ Caja 3: 3 11:05:26
 
 #pago_cliente 5 11:05:15
 Cliente 5 compra 3 items
-Cliente 5 va a caja 3 y saldrá a las 11:05:43
+Cliente 5 va a caja 3 y sale a las 11:05:43
 
 #escribir_cajas 11:05:20
 Caja 1: 1 11:05:27 
@@ -286,7 +286,7 @@ Caja 3: 3 11:05:26 5 11:05:43
 
 #pago_cliente 8 11:05:22
 Cliente 8 compra 2 items
-Cliente 8 va a caja 1 y saldrá a las 11:05:43
+Cliente 8 va a caja 1 y sale a las 11:05:43
 
 #escribir_cajas 11:05:24
 Caja 1: 1 11:05:27 8 11:05:43 
@@ -295,7 +295,7 @@ Caja 3: 3 11:05:26 5 11:05:43
 
 #pago_cliente 6 11:05:25
 Cliente 6 compra 4 items
-Cliente 6 va a caja 1 y saldrá a las 11:06:01
+Cliente 6 va a caja 1 y sale a las 11:06:01
 
 #escribir_cajas 11:05:27
 Caja 1: 1 11:05:27 8 11:05:43 6 11:06:01 
@@ -309,7 +309,7 @@ Caja 3:
 
 #pago_cliente 7 11:05:50
 Cliente 7 compra 5 items
-Cliente 7 va a caja 2 y saldrá a las 11:06:09
+Cliente 7 va a caja 2 y sale a las 11:06:09
 
 #escribir_cajas 11:05:55
 Caja 1: 6 11:06:01 

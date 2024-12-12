@@ -55,7 +55,10 @@ void Caja::actualizar_libre(const Hora& hora_actual) {
     /// Recalculate proximo_libre based on the clients in the queue
 
     /// Start from the current time or the existing proximo_libre, whichever is later
-    Hora tiempo = (proximo_libre.menor(hora_actual)) ? hora_actual : proximo_libre;
+    Hora tiempo = hora_actual;
+    if (proximo_libre.menor(hora_actual)) {
+        tiempo = proximo_libre;
+    }
 
     /// Calculate the total service time for clients in the queue
     std::queue<std::pair<Cliente, Hora>> temp_queue = cola_clientes;

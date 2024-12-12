@@ -34,10 +34,9 @@ BinTree<string> Cjt_clientes::construir_subarbol_minimo(Cliente& cliente, const 
     BinTree<string> right = construir_subarbol_minimo(cliente, arbol.right());
 
     // Check if current node is a desired item
-    bool es_producto = cliente.contiene_item(arbol.value());
 
     // If current node is a desired item or if left/right subtrees are not empty, include it
-    if (es_producto || !left.empty() || !right.empty()) {
+    if ((cliente.contiene_item(arbol.value())) || !left.empty() || !right.empty()) {
         cliente.pb_sala(arbol.value()); // Update client's visit list
         return BinTree<string>(arbol.value(), left, right);
     }

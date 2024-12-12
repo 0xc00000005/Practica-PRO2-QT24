@@ -48,31 +48,6 @@ int Cjt_cajas::buscar_mejor_caja(const Hora& hora_actual) const {
     int mejor_caja = -1;
     int menor_tiempo_espera = -1;
     int menor_num_clientes = -1;
-/*
-    for (int i = 0; i < num_cajas; ++i) {
-        if (cajas[i].esta_disponible(hora_actual)) {
-            int tiempo_espera = cajas[i].tiempo_espera_estimado(hora_actual);
-            int num_clientes = cajas[i].num_clientes_asignados();
-
-            if (mejor_caja == -1 || tiempo_espera < menor_tiempo_espera) {
-                mejor_caja = i;
-                menor_tiempo_espera = tiempo_espera;
-                menor_num_clientes = num_clientes;
-            } else if (tiempo_espera == menor_tiempo_espera) {
-                if (num_clientes < menor_num_clientes) {
-                    mejor_caja = i;
-                    menor_num_clientes = num_clientes;
-                } else if (num_clientes == menor_num_clientes) {
-                    if (i < mejor_caja) {
-                        mejor_caja = i;
-                    }
-                }
-            }
-        }
-    }
-    return mejor_caja;
-}
-*/
     for (int i = 0; i < num_cajas; ++i) {  
         int tiempo_espera = cajas[i].tiempo_espera_estimado(hora_actual);
         int num_clientes = cajas[i].num_clientes_asignados();

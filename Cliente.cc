@@ -27,6 +27,10 @@ void Cliente::guardar_items(const std::string& itemscin){
     items.insert(itemscin);
 }
 
+bool Cliente::contiene_item(const std::string& item) const {
+    return items.find(item) != items.end();
+}
+
 void Cliente::guardar_items_comprados(const std::vector<std::string>& itcmcin){
     items_comprados=itcmcin;
 }

@@ -26,6 +26,8 @@ public:
     void desea() const;
     void salas_a_visitar() const;
     void aumentar_num_productos(int num);
+    bool contiene_item(const std::string& item) const;
+
 
 private:
     int id;

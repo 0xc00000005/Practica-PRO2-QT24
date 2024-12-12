@@ -1,4 +1,3 @@
-
 /**
  * @file Cjt_clientes.hh
  * @brief Declaración de la clase Cjt_clientes que gestiona un conjunto de clientes.
@@ -68,7 +67,10 @@ private:
     bool encontrar_camino(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino);
 
     //// Function to build the minimal subtree containing all desired items
-    BinTree<std::string> construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos);
+    //BinTree<std::string> construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos);
+
+    BinTree<std::string> construir_subarbol_minimo(Cliente& cliente, const BinTree<std::string>& arbol);
+    void calcular_ruta_subarbol(const BinTree<std::string>& subarbol);
 
     //// Set of client IDs with unwanted products
     std::set<int> clientes_con_productos_no_deseados;

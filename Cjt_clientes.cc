@@ -5,157 +5,92 @@
 #include <vector>
 #include <stdexcept>
 #include <set>
-#include <algorithm>
-#include <iterator>
 
 using namespace std;
 
 typedef BinTree<string> BT;
 
-//// Inicialización del contador estático
+// Static counter initialization
 int Cjt_clientes::contador = 1;
 
-
-//// @brief Constructor por defecto para inicializar un conjunto de clientes.
+// Constructor
 Cjt_clientes::Cjt_clientes() {
     clientes = vector<Cliente>();
 }
 
-//// @brief Incrementa el contador estático para asignar IDs únicos a los clientes.
+// Increment the static counter
 void Cjt_clientes::incrementar_contador() {
     ++contador;
 }
 
-//// @brief Combina múltiples caminos hacia diferentes ítems en un único recorrido.
-//// @param caminos Vector de vectores que contiene caminos individuales hacia los ítems.
-//// @return Vector que representa el recorrido combinado.
-// Updated 'combinar_caminos_en_orden' function to include returning to the root at the end
-std::vector<std::string> Cjt_clientes::combinar_caminos_en_orden(const std::vector<std::vector<std::string>>& caminos) {
-    std::vector<std::string> recorrido;
-    if (caminos.empty()) return recorrido;
-
-    // Start with the path to the first item
-    recorrido = caminos[0];
-
-    // For each subsequent path
-    for (size_t i = 1; i < caminos.size(); ++i) {
-        const auto& prev_camino = caminos[i - 1];
-        const auto& curr_camino = caminos[i];
-
-        // Find the point where paths diverge
-        size_t j = 0;
-        while (j < prev_camino.size() && j < curr_camino.size() && prev_camino[j] == curr_camino[j]) {
-            ++j;
-        }
-
-        // Backtrack to the common ancestor
-        size_t k = prev_camino.size();
-        while (k > j) {
-            --k;
-            if (prev_camino[k] != "left" && prev_camino[k] != "right") {
-                recorrido.push_back("back");
-            }
-        }
-
-        // Move forward to the next item
-        recorrido.insert(recorrido.end(), curr_camino.begin() + j, curr_camino.end());
+// Build the minimal subtree containing the desired items and update the client's visit list
+BinTree<string> Cjt_clientes::construir_subarbol_minimo(Cliente& cliente, const BinTree<string>& arbol) {
+    if (arbol.empty()) {
+        return BinTree<string>();
     }
 
-    // Backtrack from the last item to the root
-    const auto& last_camino = caminos.back();
-    size_t k = last_camino.size();
-    while (k > 1) {
-        --k;
-        if (last_camino[k] != "left" && last_camino[k] != "right") {
-            recorrido.push_back("back");
-        }
+    // Recursively build left and right subtrees
+    BinTree<string> left = construir_subarbol_minimo(cliente, arbol.left());
+    BinTree<string> right = construir_subarbol_minimo(cliente, arbol.right());
+
+    // Check if current node is a desired item
+    bool es_producto = cliente.contiene_item(arbol.value());
+
+    // If current node is a desired item or if left/right subtrees are not empty, include it
+    if (es_producto || !left.empty() || !right.empty()) {
+        cliente.pb_sala(arbol.value()); // Update client's visit list
+        return BinTree<string>(arbol.value(), left, right);
     }
 
-    return recorrido;
+    // Otherwise, return empty tree
+    return BinTree<string>();
 }
 
-//// @brief Construye el subárbol mínimo que contiene un conjunto específico de nodos.
-//// @param arbol Árbol binario original.
-//// @param nodos_incluidos Conjunto de nodos que deben estar presentes en el subárbol.
-//// @return Subárbol que contiene solo los nodos necesarios.
-BinTree<std::string> Cjt_clientes::construir_subarbol_minimo(const BinTree<std::string>& arbol, const std::set<std::string>& nodos_incluidos) {
-    if (arbol.empty()) return BinTree<std::string>();
-
-    BinTree<std::string> left = construir_subarbol_minimo(arbol.left(), nodos_incluidos);
-    BinTree<std::string> right = construir_subarbol_minimo(arbol.right(), nodos_incluidos);
-
-    if (nodos_incluidos.find(arbol.value()) != nodos_incluidos.end() || !left.empty() || !right.empty()) {
-        return BinTree<std::string>(arbol.value(), left, right);
-    } else {
-        return BinTree<std::string>();
+// Traverse the minimal subtree to generate the path
+void Cjt_clientes::calcular_ruta_subarbol(const BinTree<string>& subarbol) {
+    if (subarbol.empty()) return;
+    cout << subarbol.value() << endl;
+    if (!subarbol.left().empty()) {
+        cout << "left" << endl;
+        calcular_ruta_subarbol(subarbol.left());
+        cout << "back" << endl;
+    }
+    if (!subarbol.right().empty()) {
+        cout << "right" << endl;
+        calcular_ruta_subarbol(subarbol.right());
+        cout << "back" << endl;
     }
 }
 
-//// @brief Crea un nuevo cliente, calcula su recorrido por la tienda y construye su subárbol.
-//// @param bintree_salas Árbol binario que representa las salas de la tienda.
-void Cjt_clientes::nuevo_cliente(const BinTree<std::string>& bintree_salas) {
+// Updated method for adding a new client
+void Cjt_clientes::nuevo_cliente(const BinTree<string>& bintree_salas) {
     int id = contador;
-    Cliente nuevoCliente(id, this); /// Pass 'this' pointer to Cliente
+    Cliente nuevoCliente(id, this); // Pass 'this' pointer to Cliente
 
-    //// Lee los ítems que desea comprar el cliente
-    std::vector<std::string> items;
-    std::string item;
-    while (std::cin >> item && item != "#") {
+    // Read the items the client wants to buy
+    vector<string> items;
+    string item;
+    while (cin >> item && item != "#") {
         items.push_back(item);
         nuevoCliente.guardar_items(item);
     }
-    
 
-    //// Encuentra el camino hacia cada ítem y construye el recorrido
-    std::vector<std::vector<std::string>> caminos; //// Vector donde se almacenan los caminos.
-    std::set<std::string> nodos_incluidos;
+    // Build the minimal subtree and update client's visit list
+    BinTree<string> subarbol = construir_subarbol_minimo(nuevoCliente, bintree_salas);
 
-    for (const std::string& item : items) {
-        std::vector<std::string> camino;
-        if (encontrar_camino(bintree_salas, item, camino)) {
-            caminos.push_back(camino);
-            /// Collect nodes to include in the minimal subtree
-            for (const auto& paso : camino) {
-                if (paso != "left" && paso != "right") {
-                    nodos_incluidos.insert(paso);
-                }
-            }
-        } else {
-            std::cout << "Item " << item << " no encontrado en la tienda.\n";
-        }
-    }
-
-    //// Combina los caminos en un solo recorrido ordenado
-    //// Esto se consigue llamando a combinar_caminos_en_orden().
-    std::vector<std::string> recorrido = combinar_caminos_en_orden(caminos);
-
-    //// Construye el subárbol mínimo que contiene todos los nodos necesarios
-    //// Esto se consigue llamando a construir_subarbol_minimo().
-    BinTree<std::string> subarbol = construir_subarbol_minimo(bintree_salas, nodos_incluidos);
-
-    //// Imprime en consola el subárbol.
-    std::cout << "Subarbol del cliente " << id << ":\n";
+    // Print the subtree
+    cout << "Subarbol del cliente " << id << ":\n";
     subarbol.setOutputFormat(BT::VISUALFORMAT);
-    std::cout << subarbol << std::endl;
+    cout << subarbol << endl;
 
-    //// Imprime en consola el recorrido del cliente.
-    std::cout << "Recorrido por la tienda del cliente " << id << ":\n";
-    for (const std::string& paso : recorrido) {
-        if (paso == "back") {
-            std::cout << "back" << std::endl;
-        } else if (paso == "left" || paso == "right") {
-            std::cout << paso << std::endl;
-        } else {
-            nuevoCliente.pb_sala(paso);
-            std::cout << paso << std::endl;
-        }
-    }
+    // Generate and print the path by traversing the minimal subtree
+    cout << "Recorrido por la tienda del cliente " << id << ":\n";
+    calcular_ruta_subarbol(subarbol);
 
-    //// Añade el cliente con todos sus datos al vector de clientes.
+    // Add the client to the list of clients
     clientes.push_back(nuevoCliente);
 
-    //// Incrementa el contador de ID.
-    /// Se consigue llamando a incrementar_contador().
+    // Increment the ID counter
     incrementar_contador();
 }
 

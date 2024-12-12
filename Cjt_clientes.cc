@@ -10,42 +10,44 @@ using namespace std;
 
 typedef BinTree<string> BT;
 
-// Static counter initialization
+//// @brief Contador estático para generar IDs
 int Cjt_clientes::contador = 1;
 
-// Constructor
+//// @brief Constructor por defecto
 Cjt_clientes::Cjt_clientes() {
     clientes = vector<Cliente>();
 }
 
-// Increment the static counter
+//// @brief Incrementa el contador de IDs
 void Cjt_clientes::incrementar_contador() {
     ++contador;
 }
 
-// Build the minimal subtree containing the desired items and update the client's visit list
+//// @brief  Construye un subárbol mínimo para un cliente.
+//// @param cliente Referencia al cliente que se está creando. 
+//// @param arbol Árbol binario que representa las salas de la tienda.
+//// @return BinTree<string> Subárbol mínimo para el cliente.
 BinTree<string> Cjt_clientes::construir_subarbol_minimo(Cliente& cliente, const BinTree<string>& arbol) {
     if (arbol.empty()) {
         return BinTree<string>();
     }
 
-    // Recursively build left and right subtrees
+    /// Recursivamente construir subárboles izquierdo y derecho
     BinTree<string> left = construir_subarbol_minimo(cliente, arbol.left());
     BinTree<string> right = construir_subarbol_minimo(cliente, arbol.right());
 
-    // Check if current node is a desired item
-
-    // If current node is a desired item or if left/right subtrees are not empty, include it
+    /// Si el cliente contiene el item actual o alguno de los subárboles no está vacío, se añade al subárbol
     if ((cliente.contiene_item(arbol.value())) || !left.empty() || !right.empty()) {
-        cliente.pb_sala(arbol.value()); // Update client's visit list
+        cliente.pb_sala(arbol.value()); /// Añadir sala al cliente
         return BinTree<string>(arbol.value(), left, right);
     }
 
-    // Otherwise, return empty tree
+    /// Si no se añade el item, se devuelve un árbol vacío
     return BinTree<string>();
 }
 
-// Traverse the minimal subtree to generate the path
+//// @brief Calcula la ruta de un subárbol.
+//// @param subarbol Subárbol a recorrer.
 void Cjt_clientes::calcular_ruta_subarbol(const BinTree<string>& subarbol) {
     if (subarbol.empty()) return;
     cout << subarbol.value() << endl;
@@ -61,12 +63,13 @@ void Cjt_clientes::calcular_ruta_subarbol(const BinTree<string>& subarbol) {
     }
 }
 
-// Updated method for adding a new client
+//// @brief Añade un nuevo cliente a la lista de clientes.
+//// @param bintree_salas Árbol binario que representa las salas asociadas al cliente.
 void Cjt_clientes::nuevo_cliente(const BinTree<string>& bintree_salas) {
     int id = contador;
-    Cliente nuevoCliente(id, this); // Pass 'this' pointer to Cliente
+    Cliente nuevoCliente(id, this); /// Crear un nuevo cliente con el ID actual
 
-    // Read the items the client wants to buy
+    /// Leer los items que el cliente desea comprar
     vector<string> items;
     string item;
     while (cin >> item && item != "#") {
@@ -74,22 +77,22 @@ void Cjt_clientes::nuevo_cliente(const BinTree<string>& bintree_salas) {
         nuevoCliente.guardar_items(item);
     }
 
-    // Build the minimal subtree and update client's visit list
+    /// Construir el subárbol mínimo para el cliente
     BinTree<string> subarbol = construir_subarbol_minimo(nuevoCliente, bintree_salas);
 
-    // Print the subtree
+    /// Imprimir el subárbol
     cout << "Subarbol del cliente " << id << ":\n";
     subarbol.setOutputFormat(BT::VISUALFORMAT);
     cout << subarbol << endl;
 
-    // Generate and print the path by traversing the minimal subtree
+    /// Generar la ruta de recorrido del cliente
     cout << "Recorrido por la tienda del cliente " << id << ":\n";
     calcular_ruta_subarbol(subarbol);
 
-    // Add the client to the list of clients
+    /// Añadir el cliente a la lista de clientes
     clientes.push_back(nuevoCliente);
 
-    // Increment the ID counter
+    /// Incrementar el contador de IDs
     incrementar_contador();
 }
 
@@ -110,7 +113,6 @@ void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
     std::cout << std::endl;
 }
 
-/// Recuperar un cliente por su ID (devuelve una referencia constante)
 //// @brief Recupera un cliente por su ID.
 //// @param id Identificador único del cliente.
 //// @return Referencia constante al cliente.
@@ -125,10 +127,10 @@ const Cliente& Cjt_clientes::obtener_cliente(int id) const {
     throw std::out_of_range("Cliente no encontrado");
 }
 
-//// @brief Recupera un cliente por su ID (versión no constante).
-//// @param id Identificador único del cliente.
-//// @return Referencia al cliente.
-//// @throw std::out_of_range Si el cliente no existe.
+/// @brief Recupera un cliente por su ID (versión no constante).
+/// @param id Identificador único del cliente.
+/// @return Referencia al cliente.
+/// @throw std::out_of_range Si el cliente no existe.
 Cliente& Cjt_clientes::obtener_cliente(int id) {
     if (id >= 1) {
         size_t index = static_cast<size_t>(id - 1);
@@ -137,40 +139,4 @@ Cliente& Cjt_clientes::obtener_cliente(int id) {
         }
     }
     throw std::out_of_range("Cliente no encontrado");
-}
-
-//// @brief Encuentra el camino hacia un ítem en el árbol binario.
-//// @param arbol Árbol binario donde buscar.
-//// @param item Ítem a buscar en el árbol.
-//// @param camino Vector donde se almacena el camino encontrado.
-//// @return true si se encuentra el ítem, false en caso contrario.
-bool Cjt_clientes::encontrar_camino(const BinTree<std::string>& arbol, const std::string& item, std::vector<std::string>& camino) {
-    if (arbol.empty()) return false;
-
-    camino.push_back(arbol.value()); //// Añade nodo actual al vector.
-
-    if (arbol.value() == item) {
-        return true;
-    }
-
-    //// Busca en el subárbol izquierdo.
-    if (!arbol.left().empty()) {
-        camino.push_back("left");
-        if (encontrar_camino(arbol.left(), item, camino)) {
-            return true;
-        }
-        camino.pop_back(); //// Elimina "left".
-    }
-
-    //// Search right subtree
-    if (!arbol.right().empty()) {
-        camino.push_back("right");
-        if (encontrar_camino(arbol.right(), item, camino)) {
-            return true;
-        }
-        camino.pop_back(); //// Elimina "right"
-    }
-
-    camino.pop_back(); //// Elimina nodo actual.
-    return false;
 }

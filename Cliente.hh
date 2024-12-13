@@ -5,9 +5,11 @@
 #ifndef CLIENTE_HH
 #define CLIENTE_HH
 
+#ifndef NO_DIAGRAM
 #include <string>
 #include <vector>
 #include <set>
+#endif
 
 /**
  * @brief Declaración adelantada de la clase Cjt_clientes para evitar dependencias circulares
@@ -24,6 +26,7 @@ public:
      * @brief Constructor por defecto
      * \pre cierto
      * \post El resultado es un cliente vacío
+     * \coste Constante
      */
     Cliente();
 
@@ -31,6 +34,7 @@ public:
      * @brief Constructor con parámetros
      * \pre id > 0, cjt_clientes != nullptr
      * \post El resultado es un cliente con identificador id y parte del conjunto de clientes.
+     * \coste Constante
      */
     Cliente(int id, Cjt_clientes* cjt_clientes);
 
@@ -38,6 +42,7 @@ public:
      * @brief Obtener el identificador del cliente
      * \pre cierto
      * \post Retorna el identificador del cliente
+     * \coste Constante
      */
     int obtenerId() const;
 
@@ -45,6 +50,7 @@ public:
      * @brief Guarda un producto en el vector de productos del cliente
      * \pre producto != "", cantidad > 0
      * \post Se añade el producto al vector de productos del cliente
+     * \coste Lineal respecto al número de productos
      */
     void guardar_producto(const std::string& producto, int cantidad);
 
@@ -52,6 +58,7 @@ public:
      * @brief Consulta el número de productos del cliente
      * \pre cierto
      * \post Retorna el número de productos del cliente
+     * \coste Constante
      */
     int numero_productos() const;
 
@@ -59,6 +66,7 @@ public:
      * @brief Aumenta el número de productos no deseados
      * \pre cierto
      * \post Se incrementa en 1 el número de productos no deseados
+     * \coste Constante
      */
     void aumentar_productos_no_deseados();
 
@@ -66,6 +74,7 @@ public:
      * @brief Consulta si el cliente tiene productos no deseados
      * \pre cierto
      * \post Retorna true si el cliente tiene productos no deseados, false en caso contrario
+     * \coste Constante
      */
     bool check_productos_no_deseados() const;
 
@@ -73,6 +82,7 @@ public:
      * @brief Imprime los productos no deseados del cliente
      * \pre cierto
      * \post Se imprime el número de productos no deseados del cliente
+     * \coste Constante
      */
     int imprimir_productos_no_deseados() const;
 
@@ -80,6 +90,7 @@ public:
      * @brief Guarda las salas que el cliente desea visitar
      * \pre sala != ""
      * \post Se añade la sala al vector de salas del cliente
+     * \coste Logarítmico respecto al número de salas
      */
     void pb_sala(const std::string& sala);
 
@@ -87,6 +98,7 @@ public:
      * @brief Guarda los items que el cliente desea comprar
      * \pre itemscin != ""
      * \post Se añade el item al conjunto de items del cliente
+     * \coste Logarítmico respecto al número de items
      */
     void guardar_items(const std::string& itemscin);
 
@@ -94,6 +106,7 @@ public:
      * @brief Imprime los items que el cliente desea comprar
      * \pre El cliente tiene items
      * \post Se imprime los items que el cliente desea comprar en orden alfabético
+     * \coste Lineal respecto al número de items
      */
     void desea() const;
 
@@ -101,6 +114,7 @@ public:
      * @brief Imprime las salas que el cliente desea visitar
      * \pre El cliente tiene salas
      * \post Se imprime las salas que el cliente desea visitar en orden alfabético
+     * \coste Lineal respecto al número de salas
      */
     void salas_a_visitar() const;
 
@@ -108,6 +122,7 @@ public:
      * @brief Aumenta el número de productos del cliente
      * \pre num > 0
      * \post Se incrementa en num el número de productos del cliente
+     * \coste Constante
      */
     void aumentar_num_productos(int num);
 
@@ -115,6 +130,7 @@ public:
      * @brief Consulta si el set items del cliente contiene "item"
      * \pre item != ""
      * \post Retorna true si el cliente contiene el item, false en caso contrario
+     * \coste Logarítmico respecto al número de items
      */
     bool contiene_item(const std::string& item) const;
 
@@ -124,7 +140,7 @@ private:
      * @brief Identificador del cliente
      */
     int id;
-    
+
     /**
      * @brief Número de productos del cliente
      */

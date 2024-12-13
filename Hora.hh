@@ -5,7 +5,9 @@
 #ifndef HORA_HH
 #define HORA_HH
 
+#ifndef NO_DIAGRAM
 #include <iostream>
+#endif
 using namespace std;
 
 /**

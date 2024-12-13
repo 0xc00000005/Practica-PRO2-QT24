@@ -1,5 +1,4 @@
 #include "Caja.hh"
-#include <queue>
 
 Caja::Caja() : idCaja(0), proximo_libre(0, 0, 0) {}
 
@@ -47,19 +46,19 @@ int Caja::obtenerId() const {
 }
 
 void Caja::actualizar_libre(const Hora& hora_actual) {
-    /// Recalcula proximo_libre a partir de los clientes en la cola
+    // Recalcula proximo_libre a partir de los clientes en la cola
 
-    /// Empieza con la hora actual o la proxima hora libre, dependiendo de cual sea menor
+    // Empieza con la hora actual o la proxima hora libre, dependiendo de cual sea menor
     Hora tiempo = (proximo_libre.menor(hora_actual)) ? hora_actual : proximo_libre;
 
-    /// Calcular el tiempo total de atención de los clientes en la cola
+    // Calcular el tiempo total de atención de los clientes en la cola
     std::queue<std::pair<Cliente, Hora>> temp_queue = cola_clientes;
     while (!temp_queue.empty()) {
         std::pair<Cliente, Hora> cliente_con_salida = temp_queue.front();
         temp_queue.pop();
     }
 
-    /// Actualiza proximo_libre
+    // Actualiza proximo_libre
     proximo_libre = tiempo;
 }
 

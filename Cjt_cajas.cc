@@ -1,5 +1,4 @@
 #include "Cjt_cajas.hh"
-#include "Cjt_clientes.hh"
 
 Cjt_cajas::Cjt_cajas() : num_cajas(0) {}
 

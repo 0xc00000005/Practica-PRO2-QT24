@@ -5,8 +5,13 @@
 #ifndef TIENDA_HH
 #define TIENDA_HH
 
+#ifndef NO_DIAGRAM
 #include <string>
 #include <vector>
+#include <iostream>
+#include <algorithm>
+#include <stdexcept>
+#endif
 #include "Cliente.hh"
 #include "BinTree.hh"
 

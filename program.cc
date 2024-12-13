@@ -1,9 +1,28 @@
-#include <iostream>
+/**
+ * @mainpage Práctica QT2024 PRO2: Megathlon.
+ 
+Programa que se encarga de gestionar el flujo de clientes en una tienda Megathlon.
+
+Gestiona la ruta de los clientes por la tienda dependiendo de su lista de la compra y organiza
+la expedición de tickets en las cajas de la tienda para optimizar el tiempo de espera de los clientes.
+*/
+
+/** @file program.cc
+    @brief Programa principal.
+*/
+
+
 #include "Caja.hh"
 #include "Tienda.hh"
 #include "Cliente.hh"
 #include "Cjt_clientes.hh"
 #include "Cjt_cajas.hh"
+#ifndef NO_DIAGRAM // explicado en Prenda.hh
+#include "<iostream>"
+#endif
+
+/** @brief Programa principal para la gestión de Megathlon.
+*/
 
 using namespace std;
 

@@ -1,10 +1,5 @@
 #include "Cjt_clientes.hh"
-#include "Cliente.hh"
-#include "BinTree.hh"
-#include <iostream>
-#include <vector>
-#include <stdexcept>
-#include <set>
+
 
 using namespace std;
 

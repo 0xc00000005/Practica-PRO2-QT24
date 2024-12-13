@@ -6,12 +6,15 @@
 #ifndef CJT_CAJAS_HH
 #define CJT_CAJAS_HH
 
-#include <vector>
-#include <queue>
-#include <iostream>
 #include "Hora.hh"
 #include "Caja.hh"
 #include "Cjt_clientes.hh"
+
+#ifndef NO_DIAGRAM
+#include <vector>
+#include <queue>
+#include <iostream>
+#endif
 
 /**
  * @class Cjt_cajas

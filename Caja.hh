@@ -7,8 +7,11 @@
 
 #include "Cliente.hh"
 #include "Hora.hh"
+
+#ifndef NO_DIAGRAM
 #include <queue>
 #include <utility>
+#endif
 
 /**
  * @class Caja

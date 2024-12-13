@@ -6,11 +6,16 @@
 #ifndef CJT_CLIENTES_HH
 #define CJT_CLIENTES_HH
 
-#include <vector>
-#include <string>
-#include <set>
-#include "BinTree.hh"
 #include "Cliente.hh"
+#include "BinTree.hh"
+
+#ifndef NO_DIAGRAM
+#include <string>
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+#include <set>
+#endif
 
 /**
  * @class Cjt_clientes

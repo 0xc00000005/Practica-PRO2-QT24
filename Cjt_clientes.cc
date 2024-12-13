@@ -113,24 +113,10 @@ void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
     std::cout << std::endl;
 }
 
-//// @brief Recupera un cliente por su ID.
+//// @brief Recupera un cliente por su ID (versión no constante).
 //// @param id Identificador único del cliente.
-//// @return Referencia constante al cliente.
+//// @return Referencia al cliente.
 //// @throw std::out_of_range Si el cliente no existe.
-const Cliente& Cjt_clientes::obtener_cliente(int id) const {
-    if (id >= 1) {
-        size_t index = static_cast<size_t>(id - 1);
-        if (index < clientes.size()) {
-            return clientes[index];
-        }
-    }
-    throw std::out_of_range("Cliente no encontrado");
-}
-
-/// @brief Recupera un cliente por su ID (versión no constante).
-/// @param id Identificador único del cliente.
-/// @return Referencia al cliente.
-/// @throw std::out_of_range Si el cliente no existe.
 Cliente& Cjt_clientes::obtener_cliente(int id) {
     if (id >= 1) {
         size_t index = static_cast<size_t>(id - 1);

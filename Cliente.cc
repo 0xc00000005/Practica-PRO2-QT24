@@ -50,27 +50,20 @@ void Cliente::salas_a_visitar() const {
 }
 
 void Cliente::guardar_producto(const std::string& producto, int cantidad) {
-    /// Check if the product exists in 'salas_depuradas'
     if (std::find(items.begin(), items.end(), producto) == items.end()) {
-        /// Product not found in 'salas_depuradas', increase 'productos_no_deseados'
         productos_no_deseados += cantidad;
-        /// Notify Cjt_clientes
+        // Notificar a Cjt_clientes
         if (cjt_clientes) {
             cjt_clientes->agregar_cliente_con_productos_no_deseados(id);
         }
     }
 
-    /// Save the product and its quantity
+    // Guardar producto y cantidades
     productos.push_back({producto, cantidad});
     aumentar_num_productos(cantidad);
 }
 
 int Cliente::numero_productos() const {
-    /*int total = 0;
-    for (const auto& p : productos) {
-        total += p.second;
-    }
-    return total;*/
     return num_productos;
 }
 

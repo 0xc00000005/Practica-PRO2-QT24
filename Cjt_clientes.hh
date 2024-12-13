@@ -44,14 +44,6 @@ public:
     Cliente& obtener_cliente(int id);
 
     /**
-     * @brief Recupera un cliente por su ID (constante).
-     * \pre El cliente con el ID especificado existe.
-     * \post El cliente con el ID especificado.
-     * \coste constante
-     */
-    const Cliente& obtener_cliente(int id) const;
-
-    /**
      * @brief Añade un cliente a la lista de clientes con productos no deseados.
      * \pre Hay un cliente con el ID especificado.
      * \post El cliente con productos no deseados se añade a la lista.

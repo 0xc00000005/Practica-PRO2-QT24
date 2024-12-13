@@ -105,16 +105,6 @@ void Cjt_clientes::imprimir_clientes_con_productos_no_deseados() const {
     std::cout << std::endl;
 }
 
-const Cliente& Cjt_clientes::obtener_cliente(int id) const {
-    if (id >= 1) {
-        size_t index = static_cast<size_t>(id - 1);
-        if (index < clientes.size()) {
-            return clientes[index];
-        }
-    }
-    throw std::out_of_range("Cliente no encontrado");
-}
-
 Cliente& Cjt_clientes::obtener_cliente(int id) {
     if (id >= 1) {
         size_t index = static_cast<size_t>(id - 1);

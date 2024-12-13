@@ -31,10 +31,6 @@ bool Cliente::contiene_item(const std::string& item) const {
     return items.find(item) != items.end();
 }
 
-void Cliente::guardar_items_comprados(const std::vector<std::string>& itcmcin){
-    items_comprados=itcmcin;
-}
-
 void Cliente::pb_sala(const std::string& sala){
     salas_depuradas.insert(sala);
 }

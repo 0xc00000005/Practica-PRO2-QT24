@@ -18,7 +18,7 @@ la expedición de tickets en las cajas de la tienda para optimizar el tiempo de 
 #include "Cjt_clientes.hh"
 #include "Cjt_cajas.hh"
 #ifndef NO_DIAGRAM // explicado en Prenda.hh
-#include "<iostream>"
+#include <iostream>
 #endif
 
 /** @brief Programa principal para la gestión de Megathlon.

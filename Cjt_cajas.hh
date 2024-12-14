@@ -27,7 +27,7 @@ public:
      * Inicializa el número de cajas en 0.
      * \pre cierto
      * \post El resultado es un conjunto de cajas vacío.
-     * \coste Constante
+     * \note Constante
      */
     Cjt_cajas();
 
@@ -35,7 +35,7 @@ public:
      * @brief Establece el número de cajas disponibles.
      * \pre n > 0
      * \post Se crean n cajas.
-     * \coste lineal respecto al número de cajas.
+     * \note lineal respecto al número de cajas.
      */
     void establecer_num_cajas(int n);
 
@@ -43,7 +43,7 @@ public:
      * @brief Asigna una caja a un cliente.
      * \pre Cliente no asignado a ninguna caja. Hora actual válida.
      * \post El cliente es asignado a una caja.
-     * \coste Constante
+     * \note Constante
      */
     int asignar_caja(const Cliente& cliente, const Hora& hora_actual);
 
@@ -51,7 +51,7 @@ public:
      * @brief Expedir ticket para un cliente.
      * \pre Cliente con productos a comprar.
      * \post Se asigna una caja al cliente y se imprime la hora de salida.
-     * \coste constante.    
+     * \note constante.    
      */    
     void expedir_ticket(Cjt_clientes& clientes);
 
@@ -59,7 +59,7 @@ public:
      * @brief Escribe los detalles de una caja.
      * \pre id_caja > 0
      * \post Se imprime los clientes asignados a la caja y su hora de salida.
-     * \coste constante
+     * \note constante
      */
     void escribir_caja_singular(int id_caja);
 
@@ -67,7 +67,7 @@ public:
      * @brief Escribe los detalles de todas las cajas.
      * \pre cierto
      * \post Se imprime los clientes asignados a cada caja.
-     * \coste lineal respecto al número de cajas.
+     * \note lineal respecto al número de cajas.
      */
     void escribir_cajas_plural();
 
@@ -87,7 +87,7 @@ private:
      * @brief Busca la mejor caja disponible según la hora actual.
      * \pre Hora actual válida.
      * \post Se devuelve el ID de la caja más adecuada.
-     * \coste lineal respecto al número de cajas.
+     * \note lineal respecto al número de cajas.
      */
     int buscar_mejor_caja(const Hora& hora_actual) const;
 
@@ -95,7 +95,7 @@ private:
      * @brief Actualiza la próxima hora donde estará libre la caja.
      * \pre id_caja > 0, hora actual válida.
      * \post La caja actualiza la hora.
-     * \coste constante
+     * \note constante
      */
     void actualizar_tiempo_caja(int id_caja, const Hora& hora_actual);
 };

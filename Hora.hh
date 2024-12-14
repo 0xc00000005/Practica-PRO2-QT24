@@ -21,7 +21,7 @@ public:
 	 * @brief Constructor por defecto.
 	 * \pre cierto
 	 * \post El resultado es una hora vacía.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	Hora();
 
@@ -29,7 +29,7 @@ public:
 	 * @brief Constructor con parámetros.
 	 * \pre h, m, s >= 0
 	 * \post El resultado es una hora con h horas, m minutos y s segundos.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	Hora(int h, int m, int s);
 
@@ -37,7 +37,7 @@ public:
 	 * @brief Leer una hora.
 	 * \pre cierto
 	 * \post Se lee una hora de la entrada estándar.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	void leer_hora();
 
@@ -45,7 +45,7 @@ public:
 	 * @brief Comprobar si una hora es menor que otra.
 	 * \pre cierto
 	 * \post El resultado indica si la hora es menor que h.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	bool menor(Hora h) const;
 
@@ -53,7 +53,7 @@ public:
 	 * @brief Comprobar si una hora es igual a otra.
 	 * \pre cierto
 	 * \post El resultado indica si la hora es igual a h.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	bool igual(Hora h) const;
 
@@ -61,7 +61,7 @@ public:
 	 * @brief Sumar segundos a una hora.
 	 * \pre seg >= 0
 	 * \post Se suman seg segundos a la hora.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	void sumar_segundos(int seg);
 
@@ -69,7 +69,7 @@ public:
 	 * @brief Pasar segundos a horas, minutos y segundos.
 	 * \pre s >= 0
 	 * \post Se calculan las horas, minutos y segundos equivalentes a s segundos.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	void pasar_a_hms(int s);
 
@@ -77,7 +77,7 @@ public:
 	 * @brief Pasar una hora a segundos.
 	 * \pre cierto
 	 * \post El resultado es el número de segundos equivalentes a la hora.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	int pasar_a_seg();
 
@@ -85,7 +85,7 @@ public:
 	 * @brief Restar una hora a otra.
 	 * \pre cierto
 	 * \post Se resta h a la hora.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	void restar_horas(Hora h);
 
@@ -93,7 +93,7 @@ public:
 	 * @brief Escribir una hora.
 	 * \pre cierto
 	 * \post Se escribe la hora en la salida.
-	 * \coste Constante
+	 * \note Constante
 	 */
 	void escribir_hora() const;
 

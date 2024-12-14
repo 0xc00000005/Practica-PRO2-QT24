@@ -4,3 +4,5 @@
 *.cor
 *.tar
 *.exe
+/html
+/latex

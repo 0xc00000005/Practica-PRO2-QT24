@@ -11,7 +11,6 @@ la expedición de tickets en las cajas de la tienda para optimizar el tiempo de 
     @brief Programa principal.
 */
 
-
 #include "Caja.hh"
 #include "Tienda.hh"
 #include "Cliente.hh"
@@ -21,11 +20,11 @@ la expedición de tickets en las cajas de la tienda para optimizar el tiempo de 
 #include <iostream>
 #endif
 
-/** @brief Programa principal para la gestión de Megathlon.
-*/
 
 using namespace std;
 
+/** @brief Programa principal para la gestión de Megathlon.
+*/
 int main() {
     Tienda megathlon = Tienda();
     Cjt_clientes cjtclientes = Cjt_clientes();

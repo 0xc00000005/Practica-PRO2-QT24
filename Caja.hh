@@ -34,7 +34,7 @@ public:
      * \note Constante
      */
     Caja(int id);
-
+    
     /**
      * @brief Asignar un cliente a la caja.
      * \pre Cliente no asignado a ninguna caja. Hora actual válida.
@@ -50,6 +50,14 @@ public:
      * \note Constante
      */
     int tiempo_espera_estimado(const Hora& hora_actual) const;
+
+    /**
+     * @brief Actualizar el tiempo de la caja después de asignar un cliente.
+     * \pre Hora actual válida.
+     * \post El tiempo de la caja es actualizado.
+     * \note Lineal respecto al número de clientes en la cola.
+     */
+    void actualizar_libre(const Hora& hora_actual);
 
     /**
      * @brief Obtener la hora en que la caja estará libre.
@@ -74,14 +82,6 @@ public:
      * \note Constante
      */
     int obtenerId() const;
-
-    /**
-     * @brief Actualizar el tiempo de la caja después de asignar un cliente.
-     * \pre Hora actual válida.
-     * \post El tiempo de la caja es actualizado.
-     * \note Lineal respecto al número de clientes en la cola.
-     */
-    void actualizar_libre(const Hora& hora_actual);
 
     /**
      * @brief Escribe los detalles de la caja.

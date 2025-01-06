@@ -41,20 +41,20 @@ public:
     void nuevo_cliente(const BinTree<std::string>& bintree_salas);
 
     /**
-     * @brief Recupera un cliente por su ID.
-     * \pre El cliente con el ID especificado existe.
-     * \post El cliente con el ID especificado.
-     * \note constante
-     */
-    Cliente& obtener_cliente(int id);
-
-    /**
      * @brief Añade un cliente a la lista de clientes con productos no deseados.
      * \pre Hay un cliente con el ID especificado.
      * \post El cliente con productos no deseados se añade a la lista.
      * \note constante
      */
     void agregar_cliente_con_productos_no_deseados(int id);
+
+    /**
+     * @brief Recupera un cliente por su ID.
+     * \pre El cliente con el ID especificado existe.
+     * \post El cliente con el ID especificado.
+     * \note constante
+     */
+    Cliente& obtener_cliente(int id);
 
     /**
      * @brief Imprime los IDs de los clientes con productos no deseados.
